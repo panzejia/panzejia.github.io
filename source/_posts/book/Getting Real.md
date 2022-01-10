@@ -18,7 +18,7 @@ categories: 书籍
 - Getting Real 是关于迭代和降低变化成本的方法。Getting Real 基本上是关于上线，调 整，持续改进，其目标的开发 Web 软件的最佳途径。
 
 - Getting Real 只交付客户所需的，摒弃任何客户不需要的。
-
+<!-- more -->
 ## Getting Real 的优点
 
 GettingReal 能够交付更好的结果，是因为它强迫你处理真正要解决的问题，而不是关于那 些问题的空想。它迫使你面对当下。
