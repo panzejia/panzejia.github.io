@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta name="description" content="数据库事务数据库事务是一个作为单个逻辑工作单元执行的一系列操作。事务具有ACID属性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。这意味着，事务内的操作，要么全部成功，要么全部失败，保持数据完整性，并且独立于其他事务运行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 基础知识">
+<meta property="og:url" content="http://example.com/2024/09/07/study/Mysql%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Panzejia">
+<meta property="og:description" content="数据库事务数据库事务是一个作为单个逻辑工作单元执行的一系列操作。事务具有ACID属性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。这意味着，事务内的操作，要么全部成功，要么全部失败，保持数据完整性，并且独立于其他事务运行。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-07T02:01:56.000Z">
+<meta property="article:modified_time" content="2024-09-20T09:05:06.830Z">
+<meta property="article:author" content="Panzejia">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/09/07/study/Mysql%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/09/07/study/Mysql%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/09/07/study/Mysql 基础知识/","title":"Mysql 基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Mysql 基础知识 | Panzejia</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Panzejia</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-学习"><a href="/categories/%E5%AD%A6%E4%B9%A0/" rel="section"><i class="pen fa-fw"></i>学习</a></li><li class="menu-item menu-item-技术"><a href="/categories/%E6%8A%80%E6%9C%AF/" rel="section"><i class="pen fa-fw"></i>技术</a></li><li class="menu-item menu-item-书籍"><a href="/categories/%E4%B9%A6%E7%B1%8D/" rel="section"><i class="pen fa-fw"></i>书籍</a></li><li class="menu-item menu-item-菜谱"><a href="/categories/%E8%8F%9C%E8%B0%B1/" rel="section"><i class="pen fa-fw"></i>菜谱</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">数据库事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96Mysql%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.</span> <span class="nav-text">优化Mysql查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%98%AF%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">索引是如何提高查询性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E5%92%8C%E5%94%AF%E4%B8%80%E9%94%AE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">主键和唯一键的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E5%B9%B6%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">事务隔离级别以及如何影响并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8%E5%AE%83%E6%9D%A5%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD"><span class="nav-number">6.</span> <span class="nav-text">慢查询日志是什么，如果使用它来优化性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8MySQL%E4%B8%AD%E4%BD%BF%E7%94%A8EXPLAIN%E5%91%BD%E4%BB%A4%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如何在MySQL中使用EXPLAIN命令？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8AMySQL%E7%9A%84ACID%E5%B1%9E%E6%80%A7%E3%80%82"><span class="nav-number">8.</span> <span class="nav-text">解释MySQL的ACID属性。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8AMySQL%E4%B8%AD%E7%9A%84%E8%A7%A6%E5%8F%91%E5%99%A8%E7%B1%BB%E5%9E%8B%E3%80%82"><span class="nav-number">9.</span> <span class="nav-text">解释MySQL中的触发器类型。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8AMySQL%E4%B8%AD%E7%9A%84LAST-INSERT-ID-%E5%87%BD%E6%95%B0%E5%8F%8A%E5%85%B6%E7%94%A8%E9%80%94%E3%80%82"><span class="nav-number">10.</span> <span class="nav-text">解释MySQL中的LAST_INSERT_ID()函数及其用途。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8MySQL%E4%B8%AD%E5%A4%84%E7%90%86%E5%A4%A7%E9%87%8F%E7%9A%84DELETE%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">如何在MySQL中处理大量的DELETE操作？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSQL%E6%B3%A8%E5%85%A5%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%AE%83%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">什么是SQL注入，如何防止它？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LIMIT%E5%AD%90%E5%8F%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%8C%E5%AF%B9%E6%80%A7%E8%83%BD%E6%9C%89%E4%BB%80%E4%B9%88%E5%BD%B1%E5%93%8D%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">LIMIT子句是如何工作的，对性能有什么影响？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96ORDER-BY%E6%9F%A5%E8%AF%A2%EF%BC%9F"><span class="nav-number">13.0.1.</span> <span class="nav-text">如何优化ORDER BY查询？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GROUP-BY%E4%B8%8EDISTINCT%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">13.0.2.</span> <span class="nav-text">GROUP BY与DISTINCT有何区别？</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Panzejia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/study/Mysql%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Panzejia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Mysql 基础知识 | Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql 基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-07 10:01:56" itemprop="dateCreated datePublished" datetime="2024-09-07T10:01:56+08:00">2024-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-20 17:05:06" itemprop="dateModified" datetime="2024-09-20T17:05:06+08:00">2024-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>数据库事务是一个作为单个逻辑工作单元执行的一系列操作。事务具有ACID属性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。这意味着，事务内的操作，要么全部成功，要么全部失败，保持数据完整性，并且独立于其他事务运行。</p>
+<span id="more"></span>
+
+<h2 id="优化Mysql查询"><a href="#优化Mysql查询" class="headerlink" title="优化Mysql查询"></a>优化Mysql查询</h2><p>使用合适的索引、避免在where子句中使用函数、使用合适的数据类型、使用limit语句减少数据量、避免全表扫描、合理设计表结构等等</p>
+<h2 id="索引是如何提高查询性能"><a href="#索引是如何提高查询性能" class="headerlink" title="索引是如何提高查询性能"></a>索引是如何提高查询性能</h2><p>索引是数据库对象，可以提高数据检索等速度。类似书的目录，使数据库能够快速定位并检索数据，而不用扫描整表</p>
+<h2 id="主键和唯一键的区别"><a href="#主键和唯一键的区别" class="headerlink" title="主键和唯一键的区别"></a>主键和唯一键的区别</h2><p>主键是表中用于唯一标识每一条记录的列或列的祝贺，一个表只能有一个主键，且主键列的值必须是唯一的，不允许为NULL。</p>
+<p>唯一键也确保列的值唯一，但是一个表可以有多个唯一键，并且唯一键的列可以包含NULL，</p>
+<h2 id="事务隔离级别以及如何影响并发"><a href="#事务隔离级别以及如何影响并发" class="headerlink" title="事务隔离级别以及如何影响并发"></a>事务隔离级别以及如何影响并发</h2><p>Mysql支持4种事务隔离级别：</p>
+<p>READ UNCOMMITED：允许读取未提交的数据变更，可能导致脏读。</p>
+<p>READ COMMITED：只能读取已提交的数据，避免了脏读</p>
+<p>REPEATABLE READ：保证在同一事务那多次读取的数据一致，Mysql默认级别</p>
+<p>SERIALIZABLE：完全串行化的读，防止脏读，不可重复读和幻读，但是性能代价最高。</p>
+<h2 id="慢查询日志是什么，如果使用它来优化性能"><a href="#慢查询日志是什么，如果使用它来优化性能" class="headerlink" title="慢查询日志是什么，如果使用它来优化性能"></a>慢查询日志是什么，如果使用它来优化性能</h2><p>慢查询日志是Mysql用来记录执行时间超过阈值的查询语句的日志。通过分析这些查询，可以发现哪些查询最消耗资源，然后进行优化。</p>
+<h2 id="如何在MySQL中使用EXPLAIN命令？"><a href="#如何在MySQL中使用EXPLAIN命令？" class="headerlink" title="如何在MySQL中使用EXPLAIN命令？"></a>如何在MySQL中使用EXPLAIN命令？</h2><p>EXPLAIN命令用于分析MySQL如何执行一个查询。它显示了查询的执行计划，包括用到的索引、数据读取方式、联接顺序等。这对于优化查询性能非常有用。例如： sql EXPLAIN SELECT * FROM employees WHERE department_id = 5; 这将展示MySQL如何执行上述查询，包括是否使用了索引。</p>
+<h2 id="解释MySQL的ACID属性。"><a href="#解释MySQL的ACID属性。" class="headerlink" title="解释MySQL的ACID属性。"></a>解释MySQL的ACID属性。</h2><p>ACID代表原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）：</p>
+<p><strong>原子性：</strong>确保事务中的所有操作要么全部完成，要么全部不完成。 </p>
+<p><strong>一致性：</strong>确保事务的执行结果总是使数据库从一个有效状态转换到另一个有效状态。 </p>
+<p><strong>隔离性：</strong>确保并发执行的事务彼此独立。 </p>
+<p><strong>持久性：</strong>确保一旦事务提交，其结果就永久保存在数据库中。</p>
+<h2 id="解释MySQL中的触发器类型。"><a href="#解释MySQL中的触发器类型。" class="headerlink" title="解释MySQL中的触发器类型。"></a>解释MySQL中的触发器类型。</h2><p>MySQL中的触发器类型包括： </p>
+<p>BEFORE INSERT：在插入操作之前触发。 </p>
+<p>AFTER INSERT：在插入操作之后触发。 </p>
+<p>BEFORE UPDATE：在更新操作之前触发。 </p>
+<p>AFTER UPDATE：在更新操作之后触发。 </p>
+<p>BEFORE DELETE：在删除操作之前触发。 </p>
+<p>AFTER DELETE：在删除操作之后触发。</p>
+<p>每种触发器都可以用来在数据变更时执行特定的逻辑。</p>
+<h2 id="解释MySQL中的LAST-INSERT-ID-函数及其用途。"><a href="#解释MySQL中的LAST-INSERT-ID-函数及其用途。" class="headerlink" title="解释MySQL中的LAST_INSERT_ID()函数及其用途。"></a>解释MySQL中的LAST_INSERT_ID()函数及其用途。</h2><p>LAST_INSERT_ID()函数在MySQL中用于检索最后一个INSERT操作产生的自增主键值。这在插入记录后需要获取新生成的ID时非常有用，尤其是在关联表之间插入数据时。例如，插入一条记录到users表后： sql INSERT INTO users (username) VALUES (‘johndoe’); SELECT LAST_INSERT_ID(); 这将返回users表中新插入行的ID。</p>
+<h2 id="如何在MySQL中处理大量的DELETE操作？"><a href="#如何在MySQL中处理大量的DELETE操作？" class="headerlink" title="如何在MySQL中处理大量的DELETE操作？"></a>如何在MySQL中处理大量的DELETE操作？</h2><p>处理大量的DELETE操作时，应考虑以下方法以提高效率并减少对性能的影响： - 分批删除：将大型删除操作分成多个小批量操作，以减少对数据库性能的影响。 - 使用索引：确保删除操作涉及的列上有合适的索引，以加快查找速度。 - 考虑使用TRUNCATE：如果需要删除表中的所有行，使用TRUNCATE TABLE而不是DELETE，因为它更快且使用更少的资源。 - 考虑归档数据：如果不需要频繁访问被删除的数据，可以先将其归档到另一个表或文件中。</p>
+<h2 id="什么是SQL注入，如何防止它？"><a href="#什么是SQL注入，如何防止它？" class="headerlink" title="什么是SQL注入，如何防止它？"></a>什么是SQL注入，如何防止它？</h2><p>SQL注入是一种安全漏洞，攻击者可以利用它向数据库查询注入恶意SQL代码。防止SQL注入的措施包括： </p>
+<ul>
+<li>使用预处理语句和参数化查询：这些技术可以确保SQL语句的结构不被用户输入的数据所改变。 </li>
+<li> 验证和清理用户输入：确保所有输入数据都经过适当的验证和转义。 </li>
+<li>使用最小权限原则：确保应用程序使用的数据库账户只拥有它需要的最小权限。</li>
+</ul>
+<h2 id="LIMIT子句是如何工作的，对性能有什么影响？"><a href="#LIMIT子句是如何工作的，对性能有什么影响？" class="headerlink" title="LIMIT子句是如何工作的，对性能有什么影响？"></a>LIMIT子句是如何工作的，对性能有什么影响？</h2><p>LIMIT子句用于限制SQL查询返回的结果数量。它对性能的影响取决于查询的上下文： - 在有索引且只需返回少量行的情况下，LIMIT可以显著提高性能。 - 但是，如果LIMIT后面的偏移量很大，MySQL可能需要读取大量不需要的行然后丢弃，这可能导致性能问题。</p>
+<h4 id="如何优化ORDER-BY查询？"><a href="#如何优化ORDER-BY查询？" class="headerlink" title="如何优化ORDER BY查询？"></a>如何优化ORDER BY查询？</h4><p>优化<code>ORDER BY</code>查询的方法包括： </p>
+<ul>
+<li>确保排序操作所依赖的列上有索引。</li>
+<li> 尽量减少需要排序的数据量，例如先过滤出需要的行，然后再排序。 </li>
+<li>避免使用不必要的复杂表达式和函数在<code>ORDER BY</code>子句中。</li>
+</ul>
+<h4 id="GROUP-BY与DISTINCT有何区别？"><a href="#GROUP-BY与DISTINCT有何区别？" class="headerlink" title="GROUP BY与DISTINCT有何区别？"></a><code>GROUP BY</code>与<code>DISTINCT</code>有何区别？</h4><p><code>GROUP BY</code>和<code>DISTINCT</code>都用于消除重复行，但它们的应用场景不同： - <strong>GROUP BY</strong>：通常与聚合函数一起使用，对数据进行分组聚合。 - <strong>DISTINCT</strong>：用于返回唯一不同的行，适用于简单的去重查询。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/07/study/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="Java基础知识">
+                  <i class="fa fa-angle-left"></i> Java基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/07/study/Spring%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="Spring 基础知识">
+                  Spring 基础知识 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">闽ICP备2024060482号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Panzejia</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

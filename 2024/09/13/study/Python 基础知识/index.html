@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta name="description" content="1、 Python 数据结构有哪些  整数（int） 浮点（float） 字符串（str） 布尔（bool） 列表（list） 元组（tuple） 字典（dict） 集合（set）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 基础知识">
+<meta property="og:url" content="http://example.com/2024/09/13/study/Python%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Panzejia">
+<meta property="og:description" content="1、 Python 数据结构有哪些  整数（int） 浮点（float） 字符串（str） 布尔（bool） 列表（list） 元组（tuple） 字典（dict） 集合（set）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.jbzj.com/file_images/article/202304/2023041310003613.png">
+<meta property="og:image" content="https://img.jbzj.com/file_images/article/202304/2023041310003614.png">
+<meta property="og:image" content="https://img.jbzj.com/file_images/article/202304/2023041310003615.png">
+<meta property="article:published_time" content="2024-09-13T02:01:56.000Z">
+<meta property="article:modified_time" content="2024-09-13T13:53:59.198Z">
+<meta property="article:author" content="Panzejia">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.jbzj.com/file_images/article/202304/2023041310003613.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/13/study/Python%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/09/13/study/Python%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/09/13/study/Python 基础知识/","title":"Python 基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python 基础知识 | Panzejia</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Panzejia</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-学习"><a href="/categories/%E5%AD%A6%E4%B9%A0/" rel="section"><i class="pen fa-fw"></i>学习</a></li><li class="menu-item menu-item-技术"><a href="/categories/%E6%8A%80%E6%9C%AF/" rel="section"><i class="pen fa-fw"></i>技术</a></li><li class="menu-item menu-item-书籍"><a href="/categories/%E4%B9%A6%E7%B1%8D/" rel="section"><i class="pen fa-fw"></i>书籍</a></li><li class="menu-item menu-item-菜谱"><a href="/categories/%E8%8F%9C%E8%B0%B1/" rel="section"><i class="pen fa-fw"></i>菜谱</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81Python-%E4%B8%AD%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%85%83%E7%BB%84%E6%98%AF%E4%B8%8D%E6%98%AF%E7%9C%9F%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">2、Python 中列表和元组的区别是什么？元组是不是真的不可变？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9F%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">3、什么是生成器和迭代器？它们之间有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85%EF%BC%9F%E8%A3%85%E9%A5%B0%E5%99%A8%E5%8F%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E8%A3%85%E9%A5%B0%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%BD%A0%E7%94%A8%E8%BF%87%E8%A3%85%E9%A5%B0%E5%99%A8%E5%90%97%EF%BC%9F%E8%AF%B7%E5%86%99%E4%B8%80%E4%B8%AA%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">4、什么是闭包？装饰器又是什么？装饰器有什么作用？你用过装饰器吗？请写一个装饰器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%8C%E7%94%A8%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">5、什么是匿名函数，用匿名函数有什么好处？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98-Python-%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%E5%90%97"><span class="nav-number">5.</span> <span class="nav-text">6、如何提高 Python 的运行效率吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E7%94%A8%E8%BF%87%E7%B1%BB%E5%90%97%EF%BC%9F%E7%9F%A5%E9%81%93%E7%BB%A7%E6%89%BF%E5%90%97%EF%BC%9F%E8%AF%B7%E5%86%99%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%94%A8%E5%88%B0%E7%BB%A7%E6%89%BF%E3%80%82"><span class="nav-number">6.</span> <span class="nav-text">7、用过类吗？知道继承吗？请写一个例子，用到继承。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">7.</span> <span class="nav-text">8、深拷贝和浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E5%88%97%E4%B8%BE8%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">9、列举8个常用模块都有那些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81Python%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%EF%BC%9F%EF%BC%88%E7%9F%A5%E9%81%93%E5%8D%B3%E5%8F%AF%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">10、Python垃圾回收机制？（知道即可）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Panzejia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/13/study/Python%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Panzejia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python 基础知识 | Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python 基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-09-13 10:01:56 / 修改时间：21:53:59" itemprop="dateCreated datePublished" datetime="2024-09-13T10:01:56+08:00">2024-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>1、 Python 数据结构有哪些</p>
+<ul>
+<li>整数（int）</li>
+<li>浮点（float）</li>
+<li>字符串（str）</li>
+<li>布尔（bool）</li>
+<li>列表（list）</li>
+<li>元组（tuple）</li>
+<li>字典（dict）</li>
+<li>集合（set）</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="2、Python-中列表和元组的区别是什么？元组是不是真的不可变？"><a href="#2、Python-中列表和元组的区别是什么？元组是不是真的不可变？" class="headerlink" title="2、Python 中列表和元组的区别是什么？元组是不是真的不可变？"></a>2、Python 中列表和元组的区别是什么？元组是不是真的不可变？</h3><ul>
+<li>列表：list 是可变类型、数据可以动态变化</li>
+<li>元组：是不可变类型，大小固定</li>
+</ul>
+<h3 id="3、什么是生成器和迭代器？它们之间有什么区别？"><a href="#3、什么是生成器和迭代器？它们之间有什么区别？" class="headerlink" title="3、什么是生成器和迭代器？它们之间有什么区别？"></a>3、什么是生成器和迭代器？它们之间有什么区别？</h3><p><strong>迭代器</strong></p>
+<p>作用：简化循环的代码并可以节约内存</p>
+<p>是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退</p>
+<p>迭代器有两个基本的方法：iter() 和 next()。</p>
+<p><strong>生成器</strong></p>
+<p>作用：节约大量内存</p>
+<p>使用了 yield 的函数被称为生成器、生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器</p>
+<p>原理：在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行</p>
+<h3 id="4、什么是闭包？装饰器又是什么？装饰器有什么作用？你用过装饰器吗？请写一个装饰器的例子"><a href="#4、什么是闭包？装饰器又是什么？装饰器有什么作用？你用过装饰器吗？请写一个装饰器的例子" class="headerlink" title="4、什么是闭包？装饰器又是什么？装饰器有什么作用？你用过装饰器吗？请写一个装饰器的例子"></a>4、什么是闭包？装饰器又是什么？装饰器有什么作用？你用过装饰器吗？请写一个装饰器的例子</h3><p>闭包是指Python中将组成函数的语言和这些语言的执行环境打包到一起所得到的对象</p>
+<p>装饰器是一种增加函数或类功能的简单方法，它可以快速给不同的函数或类插入相同的功能。语法：“@装饰器名”加在函数之前例：</p>
+<p><img src="https://img.jbzj.com/file_images/article/202304/2023041310003613.png" alt="在这里插入图片描述"></p>
+<h3 id="5、什么是匿名函数，用匿名函数有什么好处？"><a href="#5、什么是匿名函数，用匿名函数有什么好处？" class="headerlink" title="5、什么是匿名函数，用匿名函数有什么好处？"></a>5、什么是匿名函数，用匿名函数有什么好处？</h3><p><strong>匿名函数</strong>：使用lambda创建的函数，所谓匿名，意即不再使用 def 语句这样标准的形式定义一个函数。</p>
+<p><strong>好处</strong>：</p>
+<p>1、使用Python写一些执行脚本时，使用lambda可以省去定义函数的过程，让代码更加精简。</p>
+<p>2、对于一些抽象的，不会别的地方再复用的函数，有时候给函数起个名字也是个难题，使用lambda不需要考虑命名的问题。</p>
+<p>3、使用lambda在某些时候让代码更容易理解。</p>
+<p><strong>应用场景</strong>：经常与一些内置函数相结合使用，比如说<code>map()、filter()、sorted()、reduce()</code>等</p>
+<p><strong>表达式格式</strong>：<code>lambda 参数列表: lambda体</code></p>
+<p><strong>案例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame.applymap(``lambda` `x: ``&#x27;%.2f&#x27;` `%` `x)</span><br><span class="line">frame.``apply``(``lambda` `x: x.``max``() ``-` `x.``min``())</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、如何提高-Python-的运行效率吗"><a href="#6、如何提高-Python-的运行效率吗" class="headerlink" title="6、如何提高 Python 的运行效率吗"></a>6、如何提高 Python 的运行效率吗</h3><p>使用生成器优化内存</p>
+<p>循环的优化：多个if elif条件判断，可以把最有可能先发生的条件放到前面写，这样可以减少程序判断的次数，提高效率</p>
+<p>优化算法时间：算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如list和set查找某一个元素的时间复杂度分别是O(n)和O(1)</p>
+<h3 id="7、用过类吗？知道继承吗？请写一个例子，用到继承。"><a href="#7、用过类吗？知道继承吗？请写一个例子，用到继承。" class="headerlink" title="7、用过类吗？知道继承吗？请写一个例子，用到继承。"></a>7、用过类吗？知道继承吗？请写一个例子，用到继承。</h3><p>继承：指通过获取父对象的属性和能力，再加上自定义的属性和能力而成为一个对象的子对象或一个类的子类。</p>
+<p><img src="https://img.jbzj.com/file_images/article/202304/2023041310003614.png" alt="在这里插入图片描述"></p>
+<p>重写：方法名取一样，方法重写</p>
+<p><img src="https://img.jbzj.com/file_images/article/202304/2023041310003615.png" alt="在这里插入图片描述"></p>
+<h3 id="8、深拷贝和浅拷贝"><a href="#8、深拷贝和浅拷贝" class="headerlink" title="8、深拷贝和浅拷贝"></a>8、深拷贝和浅拷贝</h3><ul>
+<li>浅拷贝，改变原始对象中为可变类型的元素的值，会同时影响拷贝对象；改变原始对象中为不可变类型的元素的值，不会响拷贝对象。</li>
+<li>深拷贝，除了顶层拷贝，还对子元素也进行了拷贝。经过深拷贝后，原始对象和拷贝对象所有的可变元素地址都没有相同的了</li>
+</ul>
+<h3 id="9、列举8个常用模块都有那些？"><a href="#9、列举8个常用模块都有那些？" class="headerlink" title="9、列举8个常用模块都有那些？"></a>9、列举8个常用模块都有那些？</h3><p><code>os模块</code>：提供了不少与操作系统相关联的函数.</p>
+<p><code>sys模块</code>：通用工具脚本经常调用命令行参数.</p>
+<p><code>re模块</code>：为高级字符串处理提供了正则表达式工具。对于复杂的匹配和处理，正则表达式提供了简洁、优化的解决方案:</p>
+<p><code>random模块</code>：提供了生成随机数的工具。</p>
+<p><code>json模块</code>：提供Python解析json数据的方法，和python格式相互转化的方法</p>
+<p><code>time模块</code>：python中用于处理时间的模块</p>
+<p><code>logging模块</code>：python中关于日志处理的模块</p>
+<p><code>xml模块</code>：python爬虫中用于定位html标签的模块</p>
+<h3 id="10、Python垃圾回收机制？（知道即可）"><a href="#10、Python垃圾回收机制？（知道即可）" class="headerlink" title="10、Python垃圾回收机制？（知道即可）"></a>10、Python垃圾回收机制？（知道即可）</h3><blockquote>
+<p>python采用的是引用计数机制为主，标记-清除和分代收集(隔代回收、分代回收)两种机制为辅的策略</p>
+</blockquote>
+<p><strong>计数机制</strong>：Python的GC模块主要运用了引用计数来跟踪和回收垃圾。在引用计数的基础上，还可以通过“标记-清除”解决容器对象可能产生的循环引用的问题。通过分代回收以空间换取时间进一步提高垃圾回收的效率。</p>
+<p><strong>标记-清除</strong>：：标记-清除的出现打破了循环引用，也就是它只关注那些可能会产生循环引用的对象 缺点：该机制所带来的额外操作和需要回收的内存块成正比。</p>
+<p><strong>隔代回收</strong> 原理：将系统中的所有内存块根据其存活时间划分为不同的集合，每一个集合就成为一个“代”，垃圾收集的频率随着“代”的存活时间的增大而减小。也就是说，活得越长的对象，就越不可能是垃圾，就应该减少对它的垃圾收集频率。那么如何来衡量这个存活时间：通常是利用几次垃圾收集动作来衡量，如果一个对象经过的垃圾收集次数越多，可以得出：该对象存活时间就越长。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/11/study/ElasticSearch%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="ElasticSearch 基础知识">
+                  <i class="fa fa-angle-left"></i> ElasticSearch 基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/13/study/Mybatis%20%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="next" title="Mybatis 基础知识">
+                  Mybatis 基础知识 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">闽ICP备2024060482号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Panzejia</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

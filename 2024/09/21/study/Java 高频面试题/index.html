@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta name="description" content="Java普通类和抽象类有什么区别抽象类不能被实例化，可以有抽象方法，只需要声明，无需实现； 有抽象方法的类一定是抽象类； 抽象类的子类必须实现抽象类中的所有抽象方法，否则子类仍然是抽象类； 抽象方法不能声明为静态，不能被static，final修饰。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java高频面试题">
+<meta property="og:url" content="http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Panzejia">
+<meta property="og:description" content="Java普通类和抽象类有什么区别抽象类不能被实例化，可以有抽象方法，只需要声明，无需实现； 有抽象方法的类一定是抽象类； 抽象类的子类必须实现抽象类中的所有抽象方法，否则子类仍然是抽象类； 抽象方法不能声明为静态，不能被static，final修饰。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/image.png">
+<meta property="article:published_time" content="2024-09-21T07:46:56.000Z">
+<meta property="article:modified_time" content="2024-09-23T08:15:43.772Z">
+<meta property="article:author" content="Panzejia">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/image.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/","path":"2024/09/21/study/Java 高频面试题/","title":"Java高频面试题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java高频面试题 | Panzejia</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Panzejia</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-学习"><a href="/categories/%E5%AD%A6%E4%B9%A0/" rel="section"><i class="pen fa-fw"></i>学习</a></li><li class="menu-item menu-item-技术"><a href="/categories/%E6%8A%80%E6%9C%AF/" rel="section"><i class="pen fa-fw"></i>技术</a></li><li class="menu-item menu-item-书籍"><a href="/categories/%E4%B9%A6%E7%B1%8D/" rel="section"><i class="pen fa-fw"></i>书籍</a></li><li class="menu-item menu-item-菜谱"><a href="/categories/%E8%8F%9C%E8%B0%B1/" rel="section"><i class="pen fa-fw"></i>菜谱</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-number">1.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">普通类和抽象类有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">接口和抽象类有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E4%B8%ADIO%E6%B5%81%E5%88%86%E4%B8%BA%E5%87%A0%E7%A7%8D%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">Java中IO流分为几种？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">什么是反射？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJava%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">什么是Java序列化？什么情况下需要使用序列化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">深拷贝和浅拷贝的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%EF%BC%8C%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.</span> <span class="nav-text">操作字符串有哪些类，之间有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%85%81%E8%AE%B8%E4%BB%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD%E8%AE%BF%E9%97%AE%E9%9D%9E%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">1.8.</span> <span class="nav-text">为什么不允许从静态方法中访问非静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E9%87%8D%E8%BD%BD%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E9%87%8D%E5%86%99"><span class="nav-number">1.9.</span> <span class="nav-text">什么时候用重载，什么时候用重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E6%9B%B4%E5%80%BE%E5%90%91%E4%BD%BF%E7%94%A8%E6%8A%BD%E8%B1%A1%E7%B1%BB%E8%80%8C%E4%B8%8D%E6%98%AF%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.10.</span> <span class="nav-text">什么情况下会更倾向使用抽象类而不是接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection%E5%92%8CCollections%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.11.</span> <span class="nav-text">Collection和Collections有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List%E5%92%8CSet%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.12.</span> <span class="nav-text">List和Set的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E5%92%8CHashTable%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.13.</span> <span class="nav-text">HashMap和HashTable有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.14.</span> <span class="nav-text">HashMap 的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.15.</span> <span class="nav-text">HashSet的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue%E4%B8%ADpoll%E5%92%8Cremove%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.16.</span> <span class="nav-text">Queue中poll和remove有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E7%B1%BB%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84"><span class="nav-number">1.17.</span> <span class="nav-text">哪些集合类是线程安全的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8Iterator%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9"><span class="nav-number">1.18.</span> <span class="nav-text">迭代器Iterator是什么，怎么用，有什么特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator-%E5%92%8C-List-Iterator%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.19.</span> <span class="nav-text">Iterator 和 List Iterator有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.20.</span> <span class="nav-text">设计模式的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">2.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.</span> <span class="nav-text">IOC是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">IOC实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.3.</span> <span class="nav-text">AOP是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">AOP的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%90%86%E5%BF%B5"><span class="nav-number">2.5.</span> <span class="nav-text">AOP的基本理念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advice%EF%BC%88%E9%80%9A%E7%9F%A5%EF%BC%89%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">2.6.</span> <span class="nav-text">Advice（通知）的类型有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"><span class="nav-number">2.7.</span> <span class="nav-text">Spring 的事务隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E7%9A%84%E6%97%B6%E5%80%99%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3"><span class="nav-number">2.8.</span> <span class="nav-text">循环依赖的时候怎么解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E4%B8%AD%E5%8D%95%E4%BE%8Bbean%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%90%97"><span class="nav-number">2.9.</span> <span class="nav-text">Spring中单例bean是线程安全吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean-Factory%E5%92%8CApplicationContext%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">2.10.</span> <span class="nav-text">Bean Factory和ApplicationContext有什么区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NACOS"><span class="nav-number">3.1.</span> <span class="nav-text">NACOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">配置中心原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.2.</span> <span class="nav-text">注册中心原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%83%E8%B7%B3%E6%9C%BA%E5%88%B6"><span class="nav-number">3.1.3.</span> <span class="nav-text">心跳机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88nacos%E6%9C%89%E4%B8%A4%E7%A7%8D%E5%BF%83%E8%B7%B3%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="nav-number">3.1.4.</span> <span class="nav-text">为什么nacos有两种心跳机制？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQ"><span class="nav-number">3.2.</span> <span class="nav-text">MQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E7%9A%84%E4%B8%8D%E4%B8%A2%E5%A4%B1%EF%BC%9F"><span class="nav-number">3.2.1.</span> <span class="nav-text">RabbitMQ如何确保消息的不丢失？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-RabbitMQ%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF%EF%BC%9F"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.3.RabbitMQ如何避免消息堆积？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">3.3.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">3.3.1.</span> <span class="nav-text">Redis的常用数据类型有哪些？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.4.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><span class="nav-number">3.4.1.</span> <span class="nav-text">数据库事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8AMySQL%E4%B8%AD%E7%9A%84%E8%A7%A6%E5%8F%91%E5%99%A8%E7%B1%BB%E5%9E%8B%E3%80%82"><span class="nav-number">3.4.2.</span> <span class="nav-text">解释MySQL中的触发器类型。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E5%B9%B6%E5%8F%91"><span class="nav-number">3.4.3.</span> <span class="nav-text">事务隔离级别以及如何影响并发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYBATIS"><span class="nav-number">3.5.</span> <span class="nav-text">MYBATIS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.5.1.</span> <span class="nav-text">#{}和${}的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E7%9A%84Xml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E4%B8%8D%E5%90%8C%E7%9A%84Xml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%EF%BC%8Cid%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%EF%BC%9F"><span class="nav-number">3.5.2.</span> <span class="nav-text">Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%88%86%E9%A1%B5%E7%9A%84%EF%BC%9F%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.5.3.</span> <span class="nav-text">Mybatis是如何进行分页的？分页插件的原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E5%8A%A8%E6%80%81sql%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%EF%BC%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%A8%E6%80%81sql%EF%BC%9F"><span class="nav-number">3.5.4.</span> <span class="nav-text">Mybatis动态sql有什么用？执行原理？有哪些动态sql？</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Panzejia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/21/study/Java%20%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Panzejia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java高频面试题 | Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java高频面试题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-21 15:46:56" itemprop="dateCreated datePublished" datetime="2024-09-21T15:46:56+08:00">2024-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-23 16:15:43" itemprop="dateModified" datetime="2024-09-23T16:15:43+08:00">2024-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="普通类和抽象类有什么区别"><a href="#普通类和抽象类有什么区别" class="headerlink" title="普通类和抽象类有什么区别"></a>普通类和抽象类有什么区别</h2><p>抽象类不能被实例化，可以有抽象方法，只需要声明，无需实现；</p>
+<p>有抽象方法的类一定是抽象类；</p>
+<p>抽象类的子类必须实现抽象类中的所有抽象方法，否则子类仍然是抽象类；</p>
+<p>抽象方法不能声明为静态，不能被static，final修饰。</p>
+<span id="more"></span>
+<h2 id="接口和抽象类有什么区别"><a href="#接口和抽象类有什么区别" class="headerlink" title="接口和抽象类有什么区别"></a>接口和抽象类有什么区别</h2><p><strong>接口</strong></p>
+<p>使用interface修饰；</p>
+<p>不能实例化；</p>
+<p>类可以实现多个接口。</p>
+<p><strong>抽象类</strong></p>
+<p>使用abstract修饰；</p>
+<p>不能实例化；</p>
+<p>只能单继承；</p>
+<p>抽象类中可以包含抽象方法和非抽象方法，非抽象方法需要有方法体；</p>
+<p>如果一个类继承了抽象类，1️⃣ 如果实现了所有的抽象方法，子类可以不是抽象类；2️⃣ 如果没有实现所有抽象方法，子类仍然是抽象类。</p>
+<h2 id="Java中IO流分为几种？"><a href="#Java中IO流分为几种？" class="headerlink" title="Java中IO流分为几种？"></a>Java中IO流分为几种？</h2><p>1、按流划分，可以分为输入流和输出流；inputStream、outputStream</p>
+<p>2、按单位划分，可以分为字节流和字符流。 reader、writer。</p>
+<h2 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h2><p>所谓反射，是Java在运行时进行自我观察的能力，通过class、constructor、field、method四个方法获取一个类的各个组成部分。</p>
+<p>在Java运行时环境中，对任意一个类，可以知道类有哪些属性和方法。这种动态获取类的信息以及动态调用对象的方法的功能来自于反射机制。</p>
+<h2 id="什么是Java序列化？什么情况下需要使用序列化？"><a href="#什么是Java序列化？什么情况下需要使用序列化？" class="headerlink" title="什么是Java序列化？什么情况下需要使用序列化？"></a>什么是Java序列化？什么情况下需要使用序列化？</h2><p>序列化是一种用来处理对象流的机制。将对象的内容流化，将流化的对象传输于网络之间。最主要的目的是传递和保存对象，保存对象的完整性和可传递性。</p>
+<p>序列化是将对象转换为容易传输格式的过程。序列化是通过实现serializable接口，该接口没有需要实现的方法，implement serializable只是为了标注该对象是可被序列化的。</p>
+<p>例如，可以序列化一个对象，然后通过Internet在客户端和服务器之间传输该对象。在另一端，反序列化将从流中心构造成对象。</p>
+<p>再例如：使用一个输出流（FileOutputStream）来构造一个Object Output Stream对象，接着使用Object Output Stream对象的write Object方法就可以把参数的obj对象存储到磁盘，需要恢复的时候使用输入流。</p>
+<h2 id="深拷贝和浅拷贝的区别是什么？"><a href="#深拷贝和浅拷贝的区别是什么？" class="headerlink" title="深拷贝和浅拷贝的区别是什么？"></a>深拷贝和浅拷贝的区别是什么？</h2><p>浅拷贝：仅仅克隆基本类型变量，不克隆引用类型变量。</p>
+<p>深拷贝：既克隆基本类型变量，也克隆引用类型变量。</p>
+<p>深拷贝需要修改clone方法，对对象中内容进行clone。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) <span class="built_in">super</span>.clone();</span><br><span class="line">s.address = (Address) <span class="built_in">this</span>.address.clone();</span><br><span class="line"><span class="keyword">return</span> s;</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作字符串有哪些类，之间有什么区别"><a href="#操作字符串有哪些类，之间有什么区别" class="headerlink" title="操作字符串有哪些类，之间有什么区别"></a>操作字符串有哪些类，之间有什么区别</h2><p>String：不可变对象，每次对String类型的改变都会生成一个新的对象；</p>
+<p>String Builder：线程不安全，效率高，多用于单线程；</p>
+<p>StringBuffer：线程安全，由于加锁的原因，效率不如StringBuilder，多用于多线程。</p>
+<p>不频繁的字符串操作使用String。StringBuilder &gt; StringBuffer &gt; String</p>
+<h2 id="为什么不允许从静态方法中访问非静态变量"><a href="#为什么不允许从静态方法中访问非静态变量" class="headerlink" title="为什么不允许从静态方法中访问非静态变量"></a>为什么不允许从静态方法中访问非静态变量</h2><p>1、静态变量属于类本身，在类加载的时候就会分配内存，可以通过类名直接访问；</p>
+<p>2、非静态变量属于类的对象，只有在类的对象产生时，才会分配内存，通过类的示例去访问；</p>
+<p>3、静态方法也属于类本身，但是此时没有类的实例，内存中没有非静态变量，所以无法调用。</p>
+<h2 id="什么时候用重载，什么时候用重写"><a href="#什么时候用重载，什么时候用重写" class="headerlink" title="什么时候用重载，什么时候用重写"></a>什么时候用重载，什么时候用重写</h2><p>1、重载是多态的几种体现，在类中，要以统一的方式处理不同类型的时候可以用重载。</p>
+<p>2、重写的使用是建立在继承关系上，子类在继承父类的基础上，增加新的功能，可以用重写。</p>
+<h2 id="什么情况下会更倾向使用抽象类而不是接口"><a href="#什么情况下会更倾向使用抽象类而不是接口" class="headerlink" title="什么情况下会更倾向使用抽象类而不是接口"></a>什么情况下会更倾向使用抽象类而不是接口</h2><p>接口和抽象类都遵循“面向接口而不是实现编码”的设计原则，可以增加代码的灵活性，可以适应不断变化的需求。在Java中，只能继承一个类，但是可以实现多个接口，所以一旦继承了一个类，就失去了继承其他类的机会。有一些对时间要求比较高的应用中，倾向于使用抽象类，它会比接口稍快。如果希望把一系列行为都规范在类继承层次内，并且可以更好的在同一地方进行编码， 那么抽象类是一个更好的选择。有时，接口和抽象类可以一起使用，接口中定义函数，而在抽象类中定义默认的实现。</p>
+<h2 id="Collection和Collections有什么区别"><a href="#Collection和Collections有什么区别" class="headerlink" title="Collection和Collections有什么区别"></a>Collection和Collections有什么区别</h2><p>Collection是最基本的集合接口，Collection派生了两个子接口List和Set，分别定义了两种不同的存储方式。</p>
+<p>Collections是一个包装类，包含了各种有关集合操作的静态方法，对集合搜索、排序、线程安全等。不能实例化，就像一个工具类，服务于Collection框架。</p>
+<h2 id="List和Set的区别"><a href="#List和Set的区别" class="headerlink" title="List和Set的区别"></a>List和Set的区别</h2><p>ArrayList：动态数据的数据结构。由数组实现的List，允许对元素进行快速随机访问，但是向List中间插入或移除元素的速度很慢。</p>
+<p>LinkedList：双向链表的数据结构。对顺序访问进行了优化，向List中间插入与删除的开销并不大，随机访问相对较慢。还具有addFirst、addLast、getFirst、getLast、removeFirst、removeLast，这些方法，使得LinkedList可以当作堆栈、队列和双向队列使用。</p>
+<p>Set具有和Collection完全相同的接口，因此没有任何额外的功能，实际上set就是collection，只是行为不同。这是继承与多态思想的典型应用：表现不同行为。Set不保存重复的元素，加入Set的元素必须定义equals方法以确保对象的唯一性。</p>
+<p>HashSet：为快速查找设计的Set，存入HashSet的对象必须定义hashcode</p>
+<p>TreeSet：保存顺序的Set，底层为树结构，使用它可以从Set中提取有序的序列。</p>
+<h2 id="HashMap和HashTable有什么区别"><a href="#HashMap和HashTable有什么区别" class="headerlink" title="HashMap和HashTable有什么区别"></a>HashMap和HashTable有什么区别</h2><p>1、HashMap是线程不安全的，HashTable是线程安全的；</p>
+<p>2、HashMap中允许键值均为null，HashTable不允许；</p>
+<p>3、HashMap的默认容器是16，为2倍扩容，HashTable默认是11，为2倍+1扩容。</p>
+<h2 id="HashMap-的实现原理"><a href="#HashMap-的实现原理" class="headerlink" title="HashMap 的实现原理"></a>HashMap 的实现原理</h2><p>HashMap基于Map接口，元素以键值对方式存储，允许有null值，线程不安全的。</p>
+<p>存储结构：采用数组+链表+红黑树的存储形式。当链表长度超过阈值（8）时，将链表转换为红黑树，在性能上得到进一步提升。</p>
+<h2 id="HashSet的实现原理"><a href="#HashSet的实现原理" class="headerlink" title="HashSet的实现原理"></a>HashSet的实现原理</h2><p>HashSet实际上上一个HashMap实例，数据存储结构都是数组+链表。</p>
+<p>HashSet是基于HashMap实现的，HashSet的元素都存放在HashMap的key上，而value都是统一的对象present。</p>
+<p>HashSe中add方法调用的是底层Hash Map的put方法，put方法要判断插入值是否存在，而HashSet的add方法，首先判断元素是否存在，如果存在就插入，这样就保证了HashSet中不存在重复值。</p>
+<h2 id="Queue中poll和remove有什么区别"><a href="#Queue中poll和remove有什么区别" class="headerlink" title="Queue中poll和remove有什么区别"></a>Queue中poll和remove有什么区别</h2><p>offer和add的区别：增加新项时，如果队列满了，add会抛出异常，offer返回false；</p>
+<p>poll和remove的区别：poll和remove都是从队列中删除第一个元素，remove抛出异常，poll返回null；</p>
+<p>peek和element区别：用于查询队列头部元素，为空时element抛出异常，peek返回null。</p>
+<h2 id="哪些集合类是线程安全的"><a href="#哪些集合类是线程安全的" class="headerlink" title="哪些集合类是线程安全的"></a>哪些集合类是线程安全的</h2><p>Vector：比ArrayList多了同步化机制（线程安全）；</p>
+<p>Stack：栈，继承与Vector；</p>
+<p>HashTable：比HashMap多了线程安全；</p>
+<p>ConcurrentHashMap：一种高效但线程安全的集合。</p>
+<h2 id="迭代器Iterator是什么，怎么用，有什么特点"><a href="#迭代器Iterator是什么，怎么用，有什么特点" class="headerlink" title="迭代器Iterator是什么，怎么用，有什么特点"></a>迭代器Iterator是什么，怎么用，有什么特点</h2><p>为了方便处理集合中的元素，Iterator对象提供了一些方法专门处理集合中的元素，例如删除和获取集合中的元素。</p>
+<p>方法：</p>
+<p>java.lang.Iterable接口被java.util.Colletion 接口继承，java.utl.Collection接口的iterator()方法放回一个Iterator对象。</p>
+<p>next：获取集合中的下一个元素</p>
+<p>hasNext：检查集合中是否还有元素</p>
+<p>remove：将迭代器新返回的元素删除</p>
+<h2 id="Iterator-和-List-Iterator有什么区别"><a href="#Iterator-和-List-Iterator有什么区别" class="headerlink" title="Iterator 和 List Iterator有什么区别"></a>Iterator 和 List Iterator有什么区别</h2><p>1、 List Iterator继承Iterator</p>
+<p>2、List Iterator比Iterator多方法</p>
+<p>add：将指定元素插入列表，插入位置为迭代器当前位置之前‘</p>
+<p>set：迭代器返回的最后一个元素替换参数e</p>
+<p>has Previous：迭代器当前位置，反向遍历集合是否含有元素；</p>
+<p>previous：迭代器当前位置，反向遍历集合，下一个元素；</p>
+<p>previousIndex：迭代器当前位置，反向遍历集合，返回下一个元素的下标；</p>
+<p>nextIndex：迭代器当前位置，返回下一个元素的下标</p>
+<p>3、使用范围不同，Iterator可以迭代所有集合，ListIterator只能用于List及其子类。</p>
+<h2 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h2><p><strong>创建型模式</strong>，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。<br><strong>结构型模式</strong>，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。<br><strong>行为型模式</strong>，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="IOC是什么"><a href="#IOC是什么" class="headerlink" title="IOC是什么"></a>IOC是什么</h2><p>控制反转，将创建对象进行反转，因为正常都是自己去创建对象，现在使用spring容器去创建，根据需求自自动去创建对象。对象实例化，通过spring容器进行创建和管理，spring 通过 DI（数据注入）实现IOC</p>
+<h2 id="IOC实现原理"><a href="#IOC实现原理" class="headerlink" title="IOC实现原理"></a>IOC实现原理</h2><p>工厂模式加反射机制</p>
+<h2 id="AOP是什么"><a href="#AOP是什么" class="headerlink" title="AOP是什么"></a>AOP是什么</h2><p>AOP也是以IOC为基础，面向切面编程，抽象化的面向对象，面向对象的补充和完善。面向对象就是把事物的特征和行为抽象为一个对象。</p>
+<p><img src="image.png" alt="image.png"></p>
+<h2 id="AOP的实现原理"><a href="#AOP的实现原理" class="headerlink" title="AOP的实现原理"></a>AOP的实现原理</h2><p>AOP的实现原理是JDK动态代理，代理模式是指给某一个对象提供的一个代理，并由代理对象控制对原对象的引用。代理对象提供与真实对象相同的接口，以便代替真实对象。同时代理对象可以在执行真实对象操作时，附加其他操作。</p>
+<h2 id="AOP的基本理念"><a href="#AOP的基本理念" class="headerlink" title="AOP的基本理念"></a>AOP的基本理念</h2><p>目标对象（target）：需要被代理的类</p>
+<p>连接点（JoinPoint）：程序执行的某一个点，比如某个方法</p>
+<p>切面（Aspect）：通常是一个类，里面定义Pointcut（切入点）和Advice（通知）</p>
+<p>切入点（Pointcut）：用来指定需要将Advice（通知）使用到哪些地方</p>
+<p>通知（Advice）：所要增强或增加到功能</p>
+<p>织入（weave）：把切面应用到目标对象，并创建新的代理对象的过程</p>
+<p>引入（introduction）：在不修改代码的前提下，可以在运行期，为类动态地增加一些方法或字段</p>
+<h2 id="Advice（通知）的类型有哪些"><a href="#Advice（通知）的类型有哪些" class="headerlink" title="Advice（通知）的类型有哪些"></a>Advice（通知）的类型有哪些</h2><p>1、前置通知（before advice）：在目标方法执行前执行。</p>
+<p>2、后置通知（after advice）：在目标方法执行后执行。</p>
+<p>3、环绕通知（around）：在目标方法调用前后均可执行自定义逻辑。</p>
+<p>4、返回通知（after returning advice）：在目标方法返回结果之后执行。</p>
+<p>5、异常通知（after throwing advice）：在目标方法抛出异常之后执行。</p>
+<h2 id="Spring-的事务隔离"><a href="#Spring-的事务隔离" class="headerlink" title="Spring 的事务隔离"></a>Spring 的事务隔离</h2><p>spring事务就是对数据库事务的支持</p>
+<p>五大隔离级别：</p>
+<p>ISOLATION_DEFAULT：默认值，使用数据库的隔离级别</p>
+<p>ISOLATION_READ_UNCOMMITTED：读未提交</p>
+<p>ISOLATION_READ_COMMITTED：读已提交</p>
+<p>ISOLATION_REPEATABLE_READ：可重复读</p>
+<p>ISOLATION_SERIALIZABLE：序列化</p>
+<h2 id="循环依赖的时候怎么解决"><a href="#循环依赖的时候怎么解决" class="headerlink" title="循环依赖的时候怎么解决"></a>循环依赖的时候怎么解决</h2><p>循环依赖：A依赖B，B依赖C，C依赖A</p>
+<p>1、构造器构成的循环依赖：这种依赖spring处理不了，直接抛出异常</p>
+<p>2、单例模式下setter循环依赖：通过三级缓存处理循环依赖</p>
+<p>3、多例模式下setter循环依赖：不能处理，会一直产生新的bean，导致内存耗尽</p>
+<h2 id="Spring中单例bean是线程安全吗"><a href="#Spring中单例bean是线程安全吗" class="headerlink" title="Spring中单例bean是线程安全吗"></a>Spring中单例bean是线程安全吗</h2><p>不是，因为所有线程共享一个单例bean，存在资源竞争，所以线程不安全。实际上，大部分情况bean是无状态的，所以在某种程度上来说bean是安全的。</p>
+<h2 id="Bean-Factory和ApplicationContext有什么区别"><a href="#Bean-Factory和ApplicationContext有什么区别" class="headerlink" title="Bean Factory和ApplicationContext有什么区别"></a>Bean Factory和ApplicationContext有什么区别</h2><p>1、Bean Factory采用的是延迟加载形式注入bean，使用到bean才会加载，ApplicationContext是一次性加载所有bean</p>
+<p>2、BeanFactory需要手动注册，ApplicationContext是自动注册</p>
+<p>3、BeanFacotry不支持国际化</p>
+<h1 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h1><h2 id="NACOS"><a href="#NACOS" class="headerlink" title="NACOS"></a>NACOS</h2><h3 id="配置中心原理"><a href="#配置中心原理" class="headerlink" title="配置中心原理"></a>配置中心原理</h3><p>nacos 配置中心就是采用：客户端 long pull 的方式</p>
+<p>Nacos 客户端会循环请求服务端变更的数据，并且超时时间设置为30s，当配置发生变化时，请求的响应会立即返回，否则会一直等到 29.5s+ 之后再返回响应<br>客户端的请求到达服务端后，服务端将该请求加入到一个叫 allSubs 的队列中，等待配置发生变更时 DataChangeTask主动去触发，并将变更后的数据写入响应对象。<br>与此同时服务端也将该请求封装成一个调度任务去执行，等待调度的期间就是等DataChangeTask 主动触发的，如果延迟时间到了 DataChangeTask 还未触发的话，则调度任务开始执行数据变更的检查，然后将检查的结果写入响应对象（基于文件的MD5）</p>
+<h3 id="注册中心原理"><a href="#注册中心原理" class="headerlink" title="注册中心原理"></a>注册中心原理</h3><p>nacos注册中心采用了 ：pull （客户端的轮询）和push （服务端主动push）</p>
+<p>1、客户端启动时会将当前服务的信息包含ip、端口号、服务名、集群名等信息封装为一个Instance对象，然后创建一个定时任务，每隔一段时间向Nacos服务器发送PUT请求并携带相关信息。<br>2、nacos服务器端在接收到心跳请求后，会去检查当前服务列表中有没有该实例，如果没有的话将当前服务实例重新注册，注册完成后立即开启一个异步任务，更新客户端实例的最后心跳时间，如果当前实例是非健康状态则将其改为健康状态。<br>3、心跳定时任务创建完成后，通过POST请求将当前服务实例信息注册进nacos服务器。<br>4、nacos服务器端在接收到注册实例请求后，会将请求携带的数据封装为一个Instance对象，然后为这个服务实例创建一个服务Service，一个Service下可能有多个服务实例，服务在Nacos保存到一个ConcurrentHashMap中Map(namespace,Map(group::serviceName, Service))； 。nacos将实例添加到对应服务列表中会根据AP和CP不同的模式，采用不同协议。<br>    CP模式就是基于Raft协议（通过leader节点将实例数据更新到内存9和磁盘文件中，并且通过CountDownLatch实现了一个简单的raft写入数据的逻辑，必须集群半数以上节点写入成功才会给客户端返回成功）<br>    AP模式基于Distro协议（向任务阻塞队列添加一个本地服务实例改变任务，去更新本地服务列表，然后在遍历集群中所有节点，分别创建数据同步任务放进阻塞队列异步进行集群数据同步，不保证集群节点数据同步完成即可返回）<br>6、nacos在将服务实例更新到服务注册表中时，为了防止并发读写冲突，采用的是写时复制的思想，将原注册表数据拷贝一份，添加完成之后再替换回真正的注册表。<br>7、nacos在更新完成之后，通过发布服务变化事件，将服务变动通知给客户端，采用的是UDP通信，客户端接收到UDP消息后会返回一个ACK信号，如果一定时间内服务端没有收到ACK信号，还会尝试重发，当超出重发时间后就不在重发。<br>8、客户端通过定时任务定时从服务端拉取服务数据保存在本地缓存。<br>9、服务端在发生心跳检测、服务列表变更或者健康状态改变时会触发推送事件，在推送事件中会基于UDP通信将服务列表推送到客户端，虽然通过UDP通信不能保证消息的可靠抵达，但是由于Nacos客户端会开启定时任务，每隔一段时间更新客户端缓存的服务列表，通过定时轮询更新服务列表做兜底，所以不用担心数据不会更新的情况，这样既保证了实时性，又保证了数据更新的可靠性。</p>
+<h3 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h3><p>服务的健康检查分为两种模式：</p>
+<p><strong>客户端上报模式：</strong>客户端通过心跳上报的方式告知nacos 注册中心健康状态（默认心跳间隔5s，nacos将超过超过15s未收到心跳的实例设置为不健康，超过30s将实例删除）<br><strong>服务端主动检测：</strong>nacos主动检查客户端的健康状态（默认时间间隔20s，健康检查失败后会设置为不健康，不会立即删除）<br>nacos 目前的instance有一个ephemeral字段属性，该字段表示实例是否是临时实例还是持久化实例。如果是临时实例则不会在nacos中持久化，需要通过心跳上报，如果一段时间没有上报心跳，则会被nacos服务端删除。删除后如果又重新开始上报，则会重新实例注册。而持久化实例会被nacos服务端持久化，此时即使注册实例的进程不存在，这个实例也不会删除，只会将健康状态设置成不健康。</p>
+<h3 id="为什么nacos有两种心跳机制？"><a href="#为什么nacos有两种心跳机制？" class="headerlink" title="为什么nacos有两种心跳机制？"></a>为什么nacos有两种心跳机制？</h3><p>对于临时实例，健康检查失败，则直接删除。这种特性适合于需要应对流量突增的场景，服务可以弹性扩容，当流量过去后，服务停掉即可自动注销。<br>对于持久化实例，健康检查失败，会设置为不健康状态。它的优点就是可以实时的监控到实例的健康状态，便于后续的告警和扩容等一系列处理。</p>
+<h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><h3 id="RabbitMQ如何确保消息的不丢失？"><a href="#RabbitMQ如何确保消息的不丢失？" class="headerlink" title="RabbitMQ如何确保消息的不丢失？"></a>RabbitMQ如何确保消息的不丢失？</h3><p><strong>话术：</strong></p>
+<p>RabbitMQ针对消息传递过程中可能发生问题的各个地方，给出了针对性的解决方案：</p>
+<p>生产者发送消息时可能因为网络问题导致消息没有到达交换机：RabbitMQ提供了publisher confirm机制</p>
+<ul>
+<li>生产者发送消息后，可以编写ConfirmCallback函数</li>
+<li>消息成功到达交换机后，RabbitMQ会调用ConfirmCallback通知消息的发送者，返回ACK</li>
+<li>消息如果未到达交换机，RabbitMQ也会调用ConfirmCallback通知消息的发送者，返回NACK</li>
+<li>消息超时未发送成功也会抛出异常</li>
+</ul>
+<p>消息到达交换机后，如果未能到达队列，也会导致消息丢失：RabbitMQ提供了<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=publisher+return%E6%9C%BA%E5%88%B6&zhida_source=entity&is_preview=1">publisher return机制</a></p>
+<ul>
+<li>生产者可以定义ReturnCallback函数</li>
+<li>消息到达交换机，未到达队列，RabbitMQ会调用ReturnCallback通知发送者，告知失败原因</li>
+</ul>
+<p>消息到达队列后，MQ宕机也可能导致丢失消息：RabbitMQ提供了持久化功能，集群的主从备份功能</p>
+<ul>
+<li>消息持久化，RabbitMQ会将交换机、队列、消息持久化到磁盘，宕机重启可以恢复消息</li>
+<li>镜像集群，仲裁队列，都可以提供主从备份功能，主节点宕机，从节点会自动切换为主，数据依然在</li>
+</ul>
+<p>消息投递给消费者后，如果消费者处理不当，也可能导致消息丢失。SpringAMQP基于RabbitMQ提供了消费者确认机制、消费者重试机制，消费者失败处理策略：</p>
+<p>​        <strong>消费者的确认机制：</strong></p>
+<ul>
+<li><p>消费者处理消息成功，未出现异常时，Spring返回ACK给RabbitMQ，消息才被移除</p>
+</li>
+<li><p>消费者处理消息失败，抛出异常，宕机，Spring返回NACK或者不返回结果，消息不被异常</p>
+<p><strong>消费者重试机制：</strong></p>
+</li>
+<li><p>默认情况下，消费者处理失败时，消息会再次回到MQ队列，然后投递给其它消费者。Spring提供的<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E6%B6%88%E8%B4%B9%E8%80%85%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6&zhida_source=entity&is_preview=1">消费者重试机制</a>，则是在处理失败后不返回NACK，而是直接在消费者本地重试。多次重试都失败后，则按照消费者失败处理策略来处理消息。避免了消息频繁入队带来的额外压力。</p>
+<p><strong>消费者失败策略：</strong></p>
+</li>
+<li><p>当消费者多次本地重试失败时，消息默认会丢弃。</p>
+</li>
+<li><p>Spring提供了Republish策略，在多次重试都失败，耗尽重试次数后，将消息重新投递给指定的异常交换机，并且会携带上异常栈信息，帮助定位问题。</p>
+</li>
+</ul>
+<h3 id="2-3-RabbitMQ如何避免消息堆积？"><a href="#2-3-RabbitMQ如何避免消息堆积？" class="headerlink" title="2.3.RabbitMQ如何避免消息堆积？"></a>2.3.RabbitMQ如何避免消息堆积？</h3><p><strong>话术：</strong></p>
+<p>消息堆积问题产生的原因往往是因为消息发送的速度超过了消费者消息处理的速度。因此解决方案无外乎以下三点：</p>
+<ul>
+<li>提高消费者处理速度</li>
+<li>增加更多消费者</li>
+<li>增加队列消息存储上限</li>
+</ul>
+<p>1）提高消费者处理速度</p>
+<p>消费者处理速度是由业务代码决定的，所以我们能做的事情包括：</p>
+<ul>
+<li>尽可能优化业务代码，提高业务性能</li>
+<li>接收到消息后，开启线程池，并发处理多个消息</li>
+</ul>
+<p>优点：成本低，改改代码即可</p>
+<p>缺点：开启线程池会带来额外的性能开销，对于高频、低时延的任务不合适。推荐任务执行周期较长的业务。</p>
+<p>2）增加更多消费者</p>
+<p>一个队列绑定多个消费者，共同争抢任务，自然可以提供消息处理的速度。</p>
+<p>优点：能用钱解决的问题都不是问题。实现简单粗暴</p>
+<p>缺点：问题是没有钱。成本太高</p>
+<p>3）增加队列消息存储上限</p>
+<p>在RabbitMQ的1.8版本后，加入了新的队列模式：Lazy Queue</p>
+<p>这种队列不会将消息保存在内存中，而是在收到消息后直接写入磁盘中，理论上没有存储上限。可以解决消息堆积问题。</p>
+<p>优点：磁盘存储更安全；存储无上限；避免内存存储带来的Page Out问题，性能更稳定；</p>
+<p>缺点：磁盘存储受到IO性能的限制，消息时效性不如内存模式，但影响不大。</p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="Redis的常用数据类型有哪些？"><a href="#Redis的常用数据类型有哪些？" class="headerlink" title="Redis的常用数据类型有哪些？"></a>Redis的常用数据类型有哪些？</h3><p>支持多种类型的数据结构，主要区别是value存储的数据格式不同：</p>
+<ul>
+<li>string：最基本的数据类型，二进制安全的字符串，最大512M。</li>
+<li>list：按照添加顺序保持顺序的字符串列表。</li>
+<li>set：无序的字符串集合，不存在重复的元素。</li>
+<li>sorted set：已排序的字符串集合。</li>
+<li>hash：key-value对格式</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>数据库事务是一个作为单个逻辑工作单元执行的一系列操作。事务具有ACID属性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。这意味着，事务内的操作，要么全部成功，要么全部失败，保持数据完整性，并且独立于其他事务运行。</p>
+<h3 id="解释MySQL中的触发器类型。"><a href="#解释MySQL中的触发器类型。" class="headerlink" title="解释MySQL中的触发器类型。"></a>解释MySQL中的触发器类型。</h3><p>MySQL中的触发器类型包括： </p>
+<p>BEFORE INSERT：在插入操作之前触发。 </p>
+<p>AFTER INSERT：在插入操作之后触发。 </p>
+<p>BEFORE UPDATE：在更新操作之前触发。 </p>
+<p>AFTER UPDATE：在更新操作之后触发。 </p>
+<p>BEFORE DELETE：在删除操作之前触发。 </p>
+<p>AFTER DELETE：在删除操作之后触发。</p>
+<p>每种触发器都可以用来在数据变更时执行特定的逻辑。</p>
+<h3 id="事务隔离级别以及如何影响并发"><a href="#事务隔离级别以及如何影响并发" class="headerlink" title="事务隔离级别以及如何影响并发"></a>事务隔离级别以及如何影响并发</h3><p>Mysql支持4种事务隔离级别：</p>
+<p>READ UNCOMMITED：允许读取未提交的数据变更，可能导致脏读。</p>
+<p>READ COMMITED：只能读取已提交的数据，避免了脏读</p>
+<p>REPEATABLE READ：保证在同一事务那多次读取的数据一致，Mysql默认级别</p>
+<p>SERIALIZABLE：完全串行化的读，防止脏读，不可重复读和幻读，但是性能代价最高。</p>
+<h2 id="MYBATIS"><a href="#MYBATIS" class="headerlink" title="MYBATIS"></a>MYBATIS</h2><h3 id="和-的区别是什么？"><a href="#和-的区别是什么？" class="headerlink" title="#{}和${}的区别是什么？"></a>#{}和${}的区别是什么？</h3><p>${}是字符串替换，#{}是预处理；</p>
+<p>Mybatis在处理${}时，就是把${}直接替换成变量的值。而Mybatis在处理#{}时，会对sql语句进行预处理，将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；</p>
+<p>使用#{}可以有效的防止SQL注入，提高系统安全性。</p>
+<h3 id="Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？"><a href="#Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？" class="headerlink" title="Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？"></a>Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？</h3><blockquote>
+<p>不同的Xml映射文件，如果配置了namespace，那么id可以重复；如果没有配置namespace，那么id不能重复；</p>
+<p>原因就是namespace+id是作为Map的key使用的，如果没有namespace，就剩下id，那么，id重复会导致数据互相覆盖。有了namespace，自然id就可以重复，namespace不同，namespace+id自然也就不同。</p>
+<p>备注：在旧版本的Mybatis中，namespace是可选的，不过新版本的namespace已经是必须的了。</p>
+</blockquote>
+<h3 id="Mybatis是如何进行分页的？分页插件的原理是什么？"><a href="#Mybatis是如何进行分页的？分页插件的原理是什么？" class="headerlink" title="Mybatis是如何进行分页的？分页插件的原理是什么？"></a>Mybatis是如何进行分页的？分页插件的原理是什么？</h3><blockquote>
+<p>  Mybatis使用RowBounds对象进行分页，它是针对ResultSet结果集执行的内存分页，而非物理分页。可以在sql内直接书写带有物理分页的参数来完成物理分页功能，也可以使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6&spm=1001.2101.3001.7020">分页插件</a>来完成物理分页。</p>
+<p>  ​    分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的sql，然后重写sql，根据dialect方言，添加对应的物</p>
+</blockquote>
+<h3 id="Mybatis动态sql有什么用？执行原理？有哪些动态sql？"><a href="#Mybatis动态sql有什么用？执行原理？有哪些动态sql？" class="headerlink" title="Mybatis动态sql有什么用？执行原理？有哪些动态sql？"></a>Mybatis动态sql有什么用？执行原理？有哪些动态sql？</h3><blockquote>
+<p>Mybatis动态sql可以在Xml映射文件内，以标签的形式编写动态sql，执行原理是根据表达式的值 完成逻辑判断 并动态拼接sql的功能。</p>
+<p>Mybatis提供了9种动态sql标签：trim | where | set | foreach | if | choose | when | otherwise | bind。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/21/study/Java%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="prev" title="Java 设计模式">
+                  <i class="fa fa-angle-left"></i> Java 设计模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/23/study/React%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="React 基础知识">
+                  React 基础知识 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">闽ICP备2024060482号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Panzejia</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

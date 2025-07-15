@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta name="description" content="什么是 Spring Boot？Spring Boot 是一个建立在 Spring 框架之上的开源 Java 框架。Spring Boot 旨在以最少的设置和配置更轻松地创建独立的、生产就绪的应用程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot基础知识">
+<meta property="og:url" content="http://example.com/2024/09/08/study/SpringBoot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Panzejia">
+<meta property="og:description" content="什么是 Spring Boot？Spring Boot 是一个建立在 Spring 框架之上的开源 Java 框架。Spring Boot 旨在以最少的设置和配置更轻松地创建独立的、生产就绪的应用程序。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-08T02:01:56.000Z">
+<meta property="article:modified_time" content="2024-09-08T03:46:29.761Z">
+<meta property="article:author" content="Panzejia">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/09/08/study/SpringBoot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/09/08/study/SpringBoot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/09/08/study/SpringBoot基础知识/","title":"SpringBoot基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringBoot基础知识 | Panzejia</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Panzejia</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-学习"><a href="/categories/%E5%AD%A6%E4%B9%A0/" rel="section"><i class="pen fa-fw"></i>学习</a></li><li class="menu-item menu-item-技术"><a href="/categories/%E6%8A%80%E6%9C%AF/" rel="section"><i class="pen fa-fw"></i>技术</a></li><li class="menu-item menu-item-书籍"><a href="/categories/%E4%B9%A6%E7%B1%8D/" rel="section"><i class="pen fa-fw"></i>书籍</a></li><li class="menu-item menu-item-菜谱"><a href="/categories/%E8%8F%9C%E8%B0%B1/" rel="section"><i class="pen fa-fw"></i>菜谱</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是 Spring Boot？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Spring Boot的主要优点是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-%E7%9A%84%E5%85%B3%E9%94%AE%E7%BB%84%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">Spring Boot 的关键组件是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-%E5%92%8C-Spring-Boot-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Spring 和 Spring Boot 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBootApplication%E6%B3%A8%E9%87%8A%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">@SpringBootApplication注释的目的是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot-%E5%90%AF%E5%8A%A8%E5%99%A8%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">什么是 Spring Boot 启动器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84-Spring-Boot-%E5%90%AF%E5%8A%A8%E5%99%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">常用的 Spring Boot 启动器示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-%E4%BD%BF%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">Spring Boot 使用的默认嵌入式服务器是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">如何在 Spring Boot 应用程序中配置属性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%AE%83%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">什么是 Spring Boot 自动配置，它是如何工作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Spring-Initializer-%E5%88%9B%E5%BB%BA-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">如何使用 Spring Initializer 创建 Spring Boot 应用程序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%B9%E7%B0%A7%E5%90%AF%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8D%E5%90%8C%E7%9A%84%E6%89%A7%E8%A1%8C%E5%99%A8%E7%AB%AF%E7%82%B9%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">什么是弹簧启动执行器？什么是不同的执行器端点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A-Spring-Boot-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%AE%83%E4%BB%AC"><span class="nav-number">13.</span> <span class="nav-text">解释 Spring Boot 配置文件的概念以及如何使用它们</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B3%A8%E8%A7%A3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">Spring Boot 中常用的注解有哪些？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E7%BA%A7-Spring-Boot-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="nav-number"></span> <span class="nav-text">中级 Spring Boot 面试问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ConfigurationProperties%E6%B3%A8%E9%87%8A%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">@ConfigurationProperties注释有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Spring Boot 如何支持微服务架构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Data%EF%BC%9FSpring-Boot-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%9A%84-Spring-Data-Starters%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">什么是 Spring Data？Spring Boot 中使用哪些不同的 Spring Data Starters？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%BD%BF%E7%94%A8-RESTful-Web-%E6%9C%8D%E5%8A%A1%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">如何在 Spring Boot 应用程序中使用 RESTful Web 服务？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%B8%BA-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%9B%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">如何为 Spring Boot 应用程序创建和运行单元测试？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8Spring-Boot%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%90%AF%E7%94%A8%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">如何在Spring Boot应用程序中启用调试日志？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">Spring Boot 中如何支持响应式编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%90%AF%E7%94%A8%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">如何在 Spring Boot 应用程序中启用安全性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-DevTools-%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E5%90%AF%E7%94%A8%E5%AE%83%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">Spring Boot DevTools 的目的是什么？我们如何启用它？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E7%BB%8F%E9%AA%8C%E7%9A%84%E4%BA%BA%E7%9A%84%E9%AB%98%E7%BA%A7-Spring-Boot-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="nav-number"></span> <span class="nav-text">有经验的人的高级 Spring Boot 面试问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%90%AF%E7%94%A8-HTTPS%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">如何在 Spring Boot 应用程序中启用 HTTPS？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%A4%96%E9%83%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">如何在 Spring Boot 中配置外部配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Maven-%E5%88%9B%E5%BB%BA-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如何使用 Maven 创建 Spring Boot 应用程序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B3%A8%E9%87%8A%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">条件注释有哪些不同类型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%82%A8%E8%83%BD%E5%90%A6%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B-Spring-Boot-%E6%89%A7%E8%A1%8C%E5%99%A8%E8%BF%90%E8%A1%8C%E7%8A%B6%E5%86%B5%E6%A3%80%E6%9F%A5%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E7%8A%B6%E5%86%B5%E6%8C%87%E7%A4%BA%E5%99%A8%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">您能否解释一下 Spring Boot 执行器运行状况检查以及创建自定义运行状况指示器的过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E4%B8%AD%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A7%E8%A1%8C%E5%99%A8%E7%AB%AF%E7%82%B9%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">如何在 Spring Boot 中创建自定义执行器端点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%90%AF%E7%94%A8-CORS%EF%BC%88%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%EF%BC%89%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如何在 Spring Boot 应用程序中启用 CORS（跨域资源共享）？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AE%89%E6%8E%92%E4%BB%BB%E5%8A%A1%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">如何在 Spring Boot 应用程序中安排任务？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%90%AF%E7%94%A8%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">如何在 Spring Boot 应用程序中启用缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">10.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Panzejia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/08/study/SpringBoot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Panzejia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringBoot基础知识 | Panzejia">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-09-08 10:01:56 / 修改时间：11:46:29" itemprop="dateCreated datePublished" datetime="2024-09-08T10:01:56+08:00">2024-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="什么是-Spring-Boot？"><a href="#什么是-Spring-Boot？" class="headerlink" title="什么是 Spring Boot？"></a>什么是 Spring Boot？</h3><p>Spring Boot 是一个建立在 Spring 框架之上的开源 Java 框架。Spring Boot 旨在以最少的设置和配置更轻松地创建独立的、生产就绪的应用程序。</p>
+<span id="more"></span>
+
+<h3 id="Spring-Boot的主要优点是什么？"><a href="#Spring-Boot的主要优点是什么？" class="headerlink" title="Spring Boot的主要优点是什么？"></a>Spring Boot的主要优点是什么？</h3><p>Spring Boot 为 Java 应用程序开发提供了几个显著的优势。一些主要优势包括：</p>
+<ol>
+<li><strong>简化配置</strong>：Spring Boot 通过提供合理的默认值和自动配置，消除了手动配置的需要。它减少了样板代码，使开发人员能够更多地关注业务逻辑。</li>
+<li>**快速<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91&zhida_source=entity&is_preview=1">应用程序开发</a>**：Spring Boot 提供了一系列提高生产力的功能，例如嵌入式服务器、自动依赖项管理和热重载。这些功能可加快开发速度并缩短上市时间。</li>
+<li><strong>固执己见的方法</strong>：Spring Boot 遵循固执己见的方法，提供预定义的约定和最佳实践。它促进了一致性，并减少了做出配置决策的认知负荷。</li>
+<li><strong>微服务友好</strong>：Spring Boot 与 Spring Cloud 无缝集成，促进了<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84&zhida_source=entity&is_preview=1">微服务架构</a>的开发。它为服务发现、分布式配置、负载均衡等提供内置支持。</li>
+<li><strong>生产就绪功能</strong>：Spring Boot Actuator 提供了一组用于监视、运行状况检查、指标和安全性的生产就绪功能。它使开发人员能够深入了解应用程序性能并轻松监控系统运行状况。</li>
+<li><strong>嵌入式服务器</strong>：Spring Boot 附带了 Tomcat、Jetty 和 Undertow 等嵌入式服务器。这消除了手动服务器设置和配置的需要。</li>
+<li><strong>自动配置</strong>：Spring Boot 的自动配置功能会根据类路径依赖关系自动配置应用程序。它简化了设置过程并减少了手动配置工作。</li>
+<li><strong>社区支持</strong>：Spring Boot 拥有庞大而活跃的开发人员社区。这意味着有大量的资源、文档和社区支持可用于故障排除和共享最佳实践。</li>
+<li><strong>生态系统集成</strong>：Spring Boot 与其他 Spring 项目和第三方库无缝集成。它利用强大的 Spring 生态系统，允许开发人员将各种工具和库用于各种目的。</li>
+<li><strong>可测试性</strong>：Spring Boot 为测试提供了出色的支持，包括单元测试、集成测试和端到端测试。它提供了测试切片、模拟对象等功能，并针对不同的测试框架进行了简单配置。</li>
+</ol>
+<h3 id="Spring-Boot-的关键组件是什么？"><a href="#Spring-Boot-的关键组件是什么？" class="headerlink" title="Spring Boot 的关键组件是什么？"></a>Spring Boot 的关键组件是什么？</h3><p>Spring Boot 包含多个关键组件，这些组件协同工作以提供简化且高效的开发体验。Spring Boot 的主要组件包括：</p>
+<ol>
+<li><strong>自动配置</strong>：Spring Boot 的自动配置功能会根据类路径上检测到的依赖关系自动配置应用程序。它消除了手动配置的需要，并减少了样板代码。</li>
+<li><strong>Starter 依赖</strong>：Spring Boot 提供了一组 starter 依赖，这些依赖是预先打包的依赖，便于配置常见用例。Starters 简化了依赖项管理，并帮助开发人员快速开始使用 Web 应用程序、数据访问、安全性、测试等基本功能。</li>
+<li><strong>嵌入式服务器</strong>：Spring Boot 包括嵌入式 servlet 容器，如 Tomcat、Jetty 和 Undertow。这些嵌入式服务器允许开发人员将应用程序打包为可执行的 JAR 文件，从而简化部署并使应用程序独立。</li>
+<li><strong>Spring Boot 执行器</strong>：Spring Boot 执行器提供用于监视和管理应用程序的生产就绪功能。它提供用于运行状况检查、指标、日志记录、跟踪等的终结点。执行器可在生产环境中轻松监控和管理应用。</li>
+<li><strong>Spring Boot 命令行界面：</strong>Spring Boot 命令行界面 （CLI） 允许开发人员使用命令行界面与 Spring Boot 应用程序进行交互。它提供了一种方便的方法，可以快速制作原型、开发和测试 Spring Boot 应用程序，而无需复杂的设置和配置。</li>
+<li><strong>Spring Boot DevTools</strong>：Spring Boot DevTools 是一组增强开发体验的工具。它包括自动应用程序重启、静态资源的实时重载和增强的错误报告等功能。DevTools 显著提高了开发人员的工作效率并加快了开发过程。</li>
+<li><strong>Spring Boot 测试</strong>：Spring Boot 为测试应用程序提供了出色的支持。它提供了各种测试<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F&zhida_source=entity&is_preview=1">实用程序</a>，包括测试切片、模拟对象和针对不同测试框架的简单配置。Spring Boot 测试使编写和执行 Spring Boot 应用程序测试变得更加容易。</li>
+</ol>
+<h3 id="Spring-和-Spring-Boot-有什么区别？"><a href="#Spring-和-Spring-Boot-有什么区别？" class="headerlink" title="Spring 和 Spring Boot 有什么区别？"></a>Spring 和 Spring Boot 有什么区别？</h3><p>以下是 Spring 和 Spring Boot 之间的比较：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>Spring</th>
+<th>Spring Boot</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>配置</td>
+<td>需要手动配置</td>
+<td>提供自动配置和合理的默认值</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E7%AE%A1%E7%90%86&zhida_source=entity&is_preview=1">依赖关系管理</a></td>
+<td>手动依赖项管理</td>
+<td>使用启动器简化依赖关系管理</td>
+</tr>
+<tr>
+<td>XML 配置</td>
+<td>严重依赖 XML 配置</td>
+<td>鼓励使用注解和 Java 配置</td>
+</tr>
+<tr>
+<td>嵌入式服务器</td>
+<td>需要手动设置和配置</td>
+<td>包括嵌入式服务器，便于部署</td>
+</tr>
+<tr>
+<td>自动配置</td>
+<td>自动配置功能有限</td>
+<td>强大的自动配置功能，可实现快速开发</td>
+</tr>
+<tr>
+<td>开发时间</td>
+<td>更长的开发设置和配置</td>
+<td>使用<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8&zhida_source=entity&is_preview=1">开箱即用</a>的默认值加快开发速度</td>
+</tr>
+<tr>
+<td>约定优先于配置</td>
+<td>强调配置</td>
+<td>强调约定而不是配置</td>
+</tr>
+<tr>
+<td>微服务支持</td>
+<td>支持微服务架构</td>
+<td>提供与 Spring Cloud 的无缝集成</td>
+</tr>
+<tr>
+<td>测试支持</td>
+<td>Spring Test 提供强大的测试支持</td>
+<td>使用 Spring Boot Test 增强了测试支持</td>
+</tr>
+<tr>
+<td>驱动器</td>
+<td>执行器可作为单独的模块提供</td>
+<td>执行器集成到核心框架中</td>
+</tr>
+</tbody></table>
+<p>需要注意的是，Spring 和 Spring Boot 并不相互排斥。Spring Boot 建立在 Spring 框架之上，并提供了额外的功能来简化和加速 Spring 应用程序开发。</p>
+<h3 id="SpringBootApplication注释的目的是什么？"><a href="#SpringBootApplication注释的目的是什么？" class="headerlink" title="@SpringBootApplication注释的目的是什么？"></a>@SpringBootApplication注释的目的是什么？</h3><p>@SpringBootApplication注释结合了其他三种常用注释：@Configuration、@EnableAutoConfiguration 和 @ComponentScan。这种单一注释允许对应用程序进行简洁和简化的配置。</p>
+<p>@SpringBootApplication注解通常放置在 Spring Boot 应用程序的主类上。它充当应用程序的入口点，并引导Spring Boot运行时环境。</p>
+<h3 id="什么是-Spring-Boot-启动器？"><a href="#什么是-Spring-Boot-启动器？" class="headerlink" title="什么是 Spring Boot 启动器？"></a>什么是 Spring Boot 启动器？</h3><p>Spring Boot 启动器是预配置依赖项的精选集合，可简化 Spring Boot 应用程序中特定功能的设置和配置。它们提供必要的依赖项、合理的默认配置和自动配置。</p>
+<p>例如，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-web+starter&zhida_source=entity&is_preview=1">spring-boot-starter-web starter</a> 包含对 Web 相关库的依赖项，并提供用于处理 Web 请求的默认配置。Starters 简化了依赖关系管理，并确保所需的组件无缝协作。</p>
+<p>通过在项目中加入入门程序，您可以避免手动配置，从而节省时间和精力，并获得 Spring Boot 固执己见的应用程序开发方法的好处。</p>
+<h3 id="常用的-Spring-Boot-启动器示例"><a href="#常用的-Spring-Boot-启动器示例" class="headerlink" title="常用的 Spring Boot 启动器示例"></a>常用的 Spring Boot 启动器示例</h3><p>以下是一些常用的 Spring Boot 启动器示例：</p>
+<ol>
+<li><strong>spring-boot-starter-web</strong>：此入门器用于使用 Spring MVC 开发 Web 应用程序。它包括用于处理 HTTP 请求、管理 Web 会话和提供静态资源的依赖项。</li>
+<li><strong>spring-boot-starter-data-jpa</strong>：此入门器支持使用 Java 持久性 API （JPA） 和 Hibernate 作为默认实现进行数据访问。它包括数据库连接、实体管理和事务管理的依赖关系。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-security&zhida_source=entity&is_preview=1">spring-boot-starter-security</a>**：此启动器用于向 Spring Boot 应用程序添加安全功能。它包括身份验证、授权和安全通信的依赖项。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-test&zhida_source=entity&is_preview=1">spring-boot-starter-test</a>**：此入门器用于在 Spring Boot 应用程序中编写单元测试和集成测试。它包括用于测试 JUnit、Mockito 和 Spring Test 等框架的依赖项。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-actuator&zhida_source=entity&is_preview=1">spring-boot-starter-actuator</a>**：此入门版添加了生产就绪功能来监视和管理应用程序。它包括用于运行状况检查、指标、日志记录等的终结点。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-data-redis&zhida_source=entity&is_preview=1">spring-boot-starter-data-redis</a>**：此启动器用于处理内存中数据存储 Redis。它包括用于连接到 Redis 服务器和执行数据操作的依赖关系。</li>
+<li><strong>spring-boot-starter-amqp</strong>：此初学者支持使用高级消息队列协议 （AMQP） 进行消息传递。它包括消息传递组件（如 RabbitMQ）的依赖项。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-mail&zhida_source=entity&is_preview=1">spring-boot-starter-mail</a>**：此启动器用于在Spring Boot应用程序中发送电子邮件。它包括与电子邮件相关的功能的依赖关系。</li>
+<li><strong>spring-boot-starter-cache</strong>：此启动器支持在 Spring Boot 应用程序中缓存数据。它包括对 Ehcache 和 Redis 等缓存框架的依赖项。</li>
+<li>**<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=spring-boot-starter-oauth2-client&zhida_source=entity&is_preview=1">spring-boot-starter-oauth2-client</a>**：此入门器用于在 Spring Boot 应用程序中实现 OAuth 2.0 客户端功能。它包括用于与 OAuth 2.0 授权服务器交互的依赖项。</li>
+</ol>
+<p>Spring Boot 启动器的完整列表可以在 Spring Boot 官方网站上找到。这是官方 Spring Boot Starters 文档的链接：<a href="https://link.zhihu.com/?target=https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html%23using-boot-starter">Spring Boot Starters</a>。</p>
+<h3 id="Spring-Boot-使用的默认嵌入式服务器是什么？"><a href="#Spring-Boot-使用的默认嵌入式服务器是什么？" class="headerlink" title="Spring Boot 使用的默认嵌入式服务器是什么？"></a>Spring Boot 使用的默认嵌入式服务器是什么？</h3><p>Spring Boot 使用的默认嵌入式服务器是 Apache Tomcat。Spring Boot 将 Tomcat 作为依赖项包含在内，并在使用 spring-boot-starter-web starter 或任何其他与 Web 相关的启动器时自动将其配置为默认嵌入式服务器。</p>
+<h3 id="如何在-Spring-Boot-应用程序中配置属性？"><a href="#如何在-Spring-Boot-应用程序中配置属性？" class="headerlink" title="如何在 Spring Boot 应用程序中配置属性？"></a>如何在 Spring Boot 应用程序中配置属性？</h3><p>在 Spring Boot 应用程序中，可以使用各种方法配置属性。以下是常用的方法：</p>
+<ol>
+<li><strong>application.properties 或 application.yml 文件</strong>：Spring Boot 允许您在 application.properties 文件（对于键值格式的属性）或 application.yml 文件（对于 YAML 格式的属性）中定义配置属性。</li>
+<li><strong>命令行参数</strong>：Spring Boot 支持使用命令行参数配置属性。在运行应用程序时，可以将属性作为命令行参数以该格式传递。例如：。–property=valuejava -jar myapp.jar –server.port=8080</li>
+<li><strong>环境变量</strong>：Spring Boot 可以从环境变量中读取属性。您可以使用属性名称和值定义环境变量，Spring Boot 会自动将它们映射到相应的属性。</li>
+<li><strong>系统属性</strong>：Spring Boot 还支持使用系统属性配置属性。可以在运行应用程序时使用标志将系统属性传递给应用程序。例如：。-Djava -jar myapp.jar -Dserver.port=8080</li>
+<li><strong>@ConfigurationProperties注</strong>解：Spring Boot 提供了@ConfigurationPropertiesannotation，它允许您将外部属性直接绑定到 Java 对象。您可以定义一个用 @ConfigurationProperties 批注的配置类，并指定要绑定的属性的前缀。Spring Boot 会自动将属性映射到配置类的相应字段。</li>
+</ol>
+<h3 id="什么是-Spring-Boot-自动配置，它是如何工作的？"><a href="#什么是-Spring-Boot-自动配置，它是如何工作的？" class="headerlink" title="什么是 Spring Boot 自动配置，它是如何工作的？"></a>什么是 Spring Boot 自动配置，它是如何工作的？</h3><p>Spring Boot 自动配置会根据类路径依赖关系自动配置应用程序上下文，从而减少手动配置的需要。它扫描类路径以查找所需的库，并设置必要的 Bean 和组件。自动配置遵循预定义的规则，并使用 @ConditionalOnClass 和 @ConditionalOnMissingBean 等注释有选择地启用配置。通过将@EnableAutoConfiguration注解添加到主应用程序类，Spring Boot 会触发自动配置过程。自动配置类通常打包在启动器中，其中包含必要的配置类和依赖项。在项目中包含启动器使 Spring Boot 能够自动配置相关组件。</p>
+<p>Spring Boot 自动配置的好处包括：</p>
+<ol>
+<li><strong>减少样板代码</strong>：自动配置消除了手动配置的需要，减少了设置常用功能所需的样板代码量。</li>
+<li><strong>自以为是的默认值</strong>：自动配置根据最佳实践提供合理的默认值和约定。这使开发人员可以快速开始使用 Spring Boot 项目，而无需花费时间进行手动配置。</li>
+<li><strong>与第三方库集成</strong>：自动配置与常用库和框架无缝集成，自动配置使用它们所需的必要 Bean 和组件。</li>
+<li><strong>条件配置</strong>：自动配置根据特定类或 Bean 的存在与否有条件地应用配置。这样可以避免冲突的配置，并且仅应用相关配置。</li>
+</ol>
+<h3 id="如何使用-Spring-Initializer-创建-Spring-Boot-应用程序？"><a href="#如何使用-Spring-Initializer-创建-Spring-Boot-应用程序？" class="headerlink" title="如何使用 Spring Initializer 创建 Spring Boot 应用程序？"></a>如何使用 Spring Initializer 创建 Spring Boot 应用程序？</h3><p>使用 Spring Initializr 可以轻松创建 Spring Boot 应用程序。Spring Initializr 是一个基于 Web 的工具，用于生成一个项目模板，其中包含 Spring Boot 应用程序的所有必要依赖项和配置。</p>
+<p>要使用 Spring Initializr 轻松创建 Spring Boot 应用程序，您可以按照下列步骤操作：</p>
+<ol>
+<li><strong>访问 Spring Initializr 网站</strong>：转到 Spring Initializr 官方网站，<a href="https://link.zhihu.com/?target=https://start.spring.io/">网址为 start.spring.io</a>。</li>
+<li><strong>配置项目设置</strong>：在 Spring Initializr 网站上，您将找到用于配置项目的各种选项。提供以下详细信息：</li>
+<li><strong>项目</strong>：选择项目类型（Maven 或 Gradle）。</li>
+<li><strong>语言</strong>：选择编程语言（Java 或 Kotlin）。</li>
+<li><strong>Spring Boot 版本</strong>：选择所需的 Spring Boot 版本。</li>
+<li><strong>项目元数据</strong>：指定项目的组、项目和包名称。</li>
+<li><strong>添加依赖</strong>项：在“依赖项”部分，您可以搜索并选择项目所需的依赖项。Spring Initializr 提供了广泛的选项，例如 Spring Web、Spring Data JPA、Spring Security 等。您还可以在搜索栏中搜索特定的依赖项。</li>
+<li><strong>生成项目</strong>：配置项目设置并添加所需的依赖项后，单击“生成”按钮。Spring Initializr 将根据您的选择生成一个可下载的项目存档（ZIP 文件）。</li>
+<li><strong>提取项目</strong>：下载生成的 ZIP 文件并将其解压缩到计算机上所需的位置。</li>
+<li><strong>在 IDE 中导入项目</strong>：打开首选 IDE（例如 IntelliJ IDEA、Eclipse 或 Visual Studio Code），然后将提取的项目导入为 Maven 或 Gradle 项目。</li>
+<li><strong>开始开发</strong>：导入项目后，您可以开始开发 Spring Boot 应用程序。添加应用程序逻辑，创建控制器、服务、存储库和其他必要组件，以实现所需的功能。</li>
+<li><strong>运行应用程序</strong>：使用 IDE 的运行配置或命令行工具运行 Spring Boot 应用程序。应用程序将启动，您可以使用提供的 URL 或终结点访问它。</li>
+</ol>
+<h3 id="什么是弹簧启动执行器？什么是不同的执行器端点？"><a href="#什么是弹簧启动执行器？什么是不同的执行器端点？" class="headerlink" title="什么是弹簧启动执行器？什么是不同的执行器端点？"></a>什么是弹簧启动执行器？什么是不同的执行器端点？</h3><p>Spring Boot 执行器是 Spring Boot 框架提供的一组生产就绪管理和监视工具。它们使您能够在运行时监视 Spring Boot 应用程序并与之交互，从而提供有关其运行状况、指标和其他各个方面的宝贵见解。</p>
+<p>执行器公开一组 RESTful 端点，允许您访问有用的信息并在 Spring Boot 应用程序上执行某些操作。一些常用的终结点包括：</p>
+<ol>
+<li><strong>/actuator/health</strong>：提供有关应用程序运行状况的信息，指示应用程序是否已启动并正在运行或遇到任何问题。</li>
+<li><strong>/actuator/info</strong>：显示有关应用程序的常规信息，可以自定义这些信息以包含版本、描述和其他相关元数据等详细信息。</li>
+<li><strong>/actuator/metrics</strong>：提供有关应用程序各个方面的指标，例如内存使用率、CPU 使用率、请求/响应时间等。这些指标有助于监视和性能分析。</li>
+<li><strong>/actuator/env</strong>：显示当前环境属性及其值，包括来自外部源（如 application.properties 或环境变量）的配置属性。</li>
+<li><strong>/actuator/loggers</strong>：允许您动态查看和修改应用程序记录器的日志记录级别。这对于故障排除和调试目的非常有用。</li>
+<li><strong>/actuator/mappings</strong>：显示应用程序公开的所有终结点的详细映射，包括每个终结点支持的 HTTP 方法。</li>
+<li><strong>/actuator/beans</strong>：提供应用程序中所有 Spring Bean 的完整列表，包括它们的名称、类型和依赖关系等信息。</li>
+</ol>
+<h3 id="解释-Spring-Boot-配置文件的概念以及如何使用它们"><a href="#解释-Spring-Boot-配置文件的概念以及如何使用它们" class="headerlink" title="解释 Spring Boot 配置文件的概念以及如何使用它们"></a>解释 Spring Boot <a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6&zhida_source=entity&is_preview=1">配置文件</a>的概念以及如何使用它们</h3><p>Spring Boot 配置文件提供了一种管理不同环境或部署方案的应用程序配置的方法。使用配置文件，您可以为开发、测试、生产和任何其他特定环境定义不同的配置集。</p>
+<p>以下是 Spring Boot 配置文件的工作原理以及如何使用它们的简要说明：</p>
+<ol>
+<li><strong>定义配置文件</strong>：在 Spring Boot 应用程序中，可以通过为每个环境创建单独的属性文件来定义配置文件。例如，您可以将 application-dev.properties 用于开发环境，将 application-test.properties 用于测试，将 application-prod.properties 用于生产环境。</li>
+<li><strong>激活配置文件</strong>：可以通过多种方式激活配置文件：</li>
+<li>通过在application.properties中设置spring.profiles.active属性，或在启动应用程序时将其设置为命令行参数。</li>
+<li>通过在测试中使用类级别的@ActiveProfiles注释。</li>
+<li>通过使用系统环境变量或 JVM 系统属性来指定活动概要文件。</li>
+<li><strong>特定于配置文件的配置</strong>：激活配置文件后，Spring Boot将加载相应的属性文件并应用其中定义的配置。例如，如果 devprofile 处于活动状态。Spring Boot 将加载 application-dev.properties 文件并应用其中定义的配置。</li>
+<li><strong>覆盖配置</strong>：特定于配置文件的配置可以覆盖 application.properties 或其他属性文件中定义的默认配置。这允许您专门为每个环境自定义某些设置，而无需修改核心应用程序代码。</li>
+<li><strong>Bean 和组件扫描</strong>：Bean 和组件扫描：配置文件还可用于控制 Bean 和组件扫描过程。您可以使用 @Profile 注释 Bean 或组件，以指定仅在特定配置文件处于活动状态时才应创建和注册它们。</li>
+<li><strong>Spring Boot 的默认配置文件</strong>：Spring Boot 提供了一些默认配置文件，例如 default、dev、test 和 prod。默认配置文件始终处于活动状态，其他配置文件可以根据部署环境激活。</li>
+</ol>
+<h3 id="Spring-Boot-中常用的注解有哪些？"><a href="#Spring-Boot-中常用的注解有哪些？" class="headerlink" title="Spring Boot 中常用的注解有哪些？"></a>Spring Boot 中常用的注解有哪些？</h3><p>以下是一些常用的 Spring Boot 注解：</p>
+<ol>
+<li>@SpringBootApplication：此注解用于标记 Spring Boot 应用程序的主类。它结合了三个注释：@Configuration、@EnableAutoConfiguration 和 @ComponentScan。它支持在应用程序中进行自动配置和组件扫描。</li>
+<li>@RestController：此注解用于指示类是 RESTful 控制器。它结合了@Controller和@ResponseBody注释。它简化了 RESTful Web 服务的开发，无需用 @ResponseBody 注释每个方法。</li>
+<li>@RequestMapping：此注解用于将 HTTP 请求映射到特定的处理程序方法。它可以在类级别应用，为类中的所有方法指定基 URL，也可以在方法级别应用，为特定处理程序方法定义 URL 和 HTTP 方法。</li>
+<li>@Autowired：此注解用于自动将依赖项连接到 Spring 管理的 Bean 中。它允许 Spring 自动发现并注入所需的 bean，而无需显式 bean 配置。</li>
+<li>@Value：此注解用于将属性文件或环境变量中的值注入 Spring Beans。它可用于注入简单的值，如字符串或数字，以及复杂的对象。</li>
+<li>@Configuration：此注解用于指示类为 Spring 应用程序上下文提供配置。它通常与 @Bean 结合使用，以定义 Bean 和其他配置元素。</li>
+<li>@ComponentScan：此注解用于指定要扫描 Spring 组件（如控制器、服务和存储库）的基本包。它允许 Spring 在应用程序上下文中自动发现和注册这些组件。</li>
+<li>@EnableAutoConfiguration：此注解启用了 Spring Boot 的自动配置机制，该机制会根据依赖关系和类路径自动配置各种组件和 bean。</li>
+<li>@Conditional：此注解用于根据特定条件有条件地启用或禁用 Bean 和配置。它允许您根据特定条件或环境设置自定义应用程序的行为。</li>
+</ol>
+<h2 id="中级-Spring-Boot-面试问题"><a href="#中级-Spring-Boot-面试问题" class="headerlink" title="中级 Spring Boot 面试问题"></a>中级 Spring Boot 面试问题</h2><h3 id="ConfigurationProperties注释有什么用？"><a href="#ConfigurationProperties注释有什么用？" class="headerlink" title="@ConfigurationProperties注释有什么用？"></a>@ConfigurationProperties注释有什么用？</h3><p>Spring Boot 中的@ConfigurationProperties注用于将外部配置属性绑定到 Java 类。它提供了一种将配置文件（如 application.properties 或 application.yml）中定义的属性映射到配置类中的相应字段的便捷方法。</p>
+<p>使用@ConfigurationProperties的好处包括：</p>
+<ol>
+<li><strong>类型安全</strong>：注释可确保配置属性绑定到配置类中定义的相应类型，从而防止类型不匹配和潜在的运行时错误。</li>
+<li><strong>属性验证</strong>：属性验证：您可以使用 Spring 提供的各种验证注释来验证属性，例如 @NotNull、@Min、@Max 和自定义验证。</li>
+<li><strong>分层属性映射</strong>：您可以定义嵌套配置类来表示复杂的配置结构，并将它们分层映射到相应的属性。</li>
+<li><strong>易于集成</strong>：带注释的配置类可以很容易地自动连接并在整个应用程序中使用，从而简化了不同组件中配置值的检索。</li>
+</ol>
+<p>下面是一个使用示例：@ConfigurationProperties</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConfigurationProperties(prefix = &quot;myapp&quot;)</span><br><span class="line">public class MyAppConfiguration &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int port;</span><br><span class="line"></span><br><span class="line">    // Getters and setters</span><br><span class="line"></span><br><span class="line">    // Other custom methods or business logic</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Database Configuration</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/mydatabase</span><br><span class="line">spring.datasource.username=myusername</span><br><span class="line">spring.datasource.password=mypassword</span><br><span class="line"></span><br><span class="line"># Server Configuration</span><br><span class="line">server.port=8080</span><br><span class="line">server.servlet.context-path=/myapp</span><br><span class="line"></span><br><span class="line"># Custom Application Properties</span><br><span class="line">myapp.name=My Application</span><br><span class="line">myapp.api.key=abc123在此示例中，MyAppConfiguration 类使用 @ConfigurationProperties 进行批注，并指定前缀“myapp”。配置文件中以前缀“myapp”定义的属性将绑定到此类中的相应字段。</span><br></pre></td></tr></table></figure>
+
+<h3 id="Spring-Boot-如何支持微服务架构？"><a href="#Spring-Boot-如何支持微服务架构？" class="headerlink" title="Spring Boot 如何支持微服务架构？"></a>Spring Boot 如何支持微服务架构？</h3><p>Spring Boot 为构建基于微服务的应用程序提供了广泛的支持。它提供了一系列功能和集成，可简化微服务的开发、部署和管理。以下是 Spring Boot 支持微服务架构的方式：</p>
+<ol>
+<li><strong>Spring Cloud</strong>：Spring Boot 与 Spring Cloud 无缝集成，Spring Cloud 是一组旨在构建和运行云原生微服务的工具和框架。Spring Cloud 提供服务发现、客户端负载均衡、分布式配置管理、熔断机制等功能。</li>
+<li><strong>微服务设计模式</strong>：Spring Boot 采用微服务设计模式，例如使用 RESTful API 进行服务之间的通信、无状态服务以实现可扩展性以及去中心化数据管理。它提供了一个轻量级和灵活的框架，使开发人员能够轻松实现这些模式。</li>
+<li><strong>服务注册和发现</strong>：Spring Boot 与服务注册和发现工具集成，例如 Netflix Eureka 和 Consul。这些工具允许微服务将自己注册到注册表中，并动态发现其他服务。这有助于实现服务弹性、负载均衡和自动服务发现。</li>
+<li><strong>外部化配置</strong>：Spring Boot支持外部化配置，可以根据环境或特定部署需求轻松配置微服务。它支持将配置与代码分离，从而更轻松地跨多个微服务管理配置属性。</li>
+<li><strong>分布式跟踪和监控</strong>：Spring Boot 与 Zipkin 和 Sleuth 等分布式跟踪系统集成，支持跨多个微服务跟踪请求。它还提供与 Prometheus 和 Grafana 等监控工具的集成，以监控微服务的运行状况、性能和资源使用情况。</li>
+<li><strong>复原能力和容错</strong>能力：Spring Boot 支持使用断路器（例如 Netflix Hystrix）等功能实现容错微服务，这有助于防止分布式系统中的级联故障。它还提供了用于处理微服务交互中的重试、超时和回退的机制。</li>
+<li><strong>容器化和部署</strong>：Spring Boot 应用程序可以使用 Docker 等技术轻松容器化，从而允许使用 Kubernetes 等容器编排平台无缝部署和扩展微服务。</li>
+</ol>
+<h3 id="什么是-Spring-Data？Spring-Boot-中使用哪些不同的-Spring-Data-Starters？"><a href="#什么是-Spring-Data？Spring-Boot-中使用哪些不同的-Spring-Data-Starters？" class="headerlink" title="什么是 Spring Data？Spring Boot 中使用哪些不同的 Spring Data Starters？"></a>什么是 Spring Data？Spring Boot 中使用哪些不同的 Spring Data Starters？</h3><p>Spring Data 是 Spring Framework 的一个子项目，它通过为不同的数据存储技术提供统一的编程模型来简化数据访问。它减少了样板代码，并允许开发人员专注于业务逻辑。Spring Data 支持关系数据库、NoSQL 数据库等。它利用存储库来抽象数据访问操作，无需手动 CRUD 代码。Spring Data的启动器为特定数据库提供预配置的依赖项和自动配置，从而简化了设置过程。借助 Spring Data，开发人员可以轻松地与数据源进行交互，并从其强大的查询功能中受益。</p>
+<p>以下是适用于不同类型数据库的 Spring Data 启动器的一些示例：</p>
+<ol>
+<li><strong>spring-boot-starter-data-jpa</strong>：此入门器提供对 Java 持久性 API （JPA） 和 Hibernate 的支持。它包括使用 JPA 处理关系数据库所需的依赖关系和配置。</li>
+<li><strong>spring-boot-starter-data-mongodb</strong>：此启动器提供对 MongoDB（一种流行的 NoSQL 数据库）的支持。它包括使用 Spring Data MongoDB 处理 MongoDB 所需的依赖项和配置。</li>
+<li><strong>spring-boot-starter-data-redis</strong>：此启动器提供对 Redis 的支持，Redis 是一种内存中数据结构存储。它包括使用 Spring Data Redis 处理 Redis 所需的依赖项和配置。</li>
+<li><strong>spring-boot-starter-data-cassandra</strong>：此入门器提供对 Apache Cassandra 的支持，这是一个高度可扩展的 NoSQL 数据库。它包括使用 Spring Data Cassandra 处理 Cassandra 所需的依赖项和配置。</li>
+<li><strong>spring-boot-starter-data-elasticsearch</strong>：此入门器提供对分布式搜索和分析引擎 Elasticsearch 的支持。它包括使用 Spring Data Elasticsearch 处理 Elasticsearch 所需的依赖项和配置。</li>
+</ol>
+<h3 id="如何在-Spring-Boot-应用程序中使用-RESTful-Web-服务？"><a href="#如何在-Spring-Boot-应用程序中使用-RESTful-Web-服务？" class="headerlink" title="如何在 Spring Boot 应用程序中使用 RESTful Web 服务？"></a>如何在 Spring Boot 应用程序中使用 RESTful Web 服务？</h3><p>在 Spring Boot 应用程序中，您可以使用 RestTemplate 或 WebClient 使用 RESTful Web 服务。RestTemplate 提供了用于发出 HTTP 请求的同步 API，而 WebClient 提供了一种非阻塞和反应式方法。两者都允许您发送 GET、POST、PUT、DELETE 请求、处理响应数据并将其反序列化为 Java 对象。</p>
+<h3 id="如何为-Spring-Boot-应用程序创建和运行单元测试？"><a href="#如何为-Spring-Boot-应用程序创建和运行单元测试？" class="headerlink" title="如何为 Spring Boot 应用程序创建和运行单元测试？"></a>如何为 Spring Boot 应用程序创建和运行单元测试？</h3><p>在 Spring Boot 应用程序中，您可以使用 Spring Test 框架创建和运行单元测试。通过利用 @RunWith（SpringRunner.class） 和 @SpringBootTest 等注释，您可以初始化应用程序上下文并对 Bean 和组件执行测试。</p>
+<p>此外，您可以使用 Mockito 或其他模拟框架来模拟依赖项并隔离被测单元。借助 JUnit 或 AssertJ 的断言，可以验证预期的行为和断言。</p>
+<p>最后，可以使用 Maven 或 Gradle 等工具运行测试，这些工具执行测试并提供有关测试结果和覆盖率的报告。</p>
+<h3 id="如何在Spring-Boot应用程序中启用调试日志？"><a href="#如何在Spring-Boot应用程序中启用调试日志？" class="headerlink" title="如何在Spring Boot应用程序中启用调试日志？"></a>如何在Spring Boot应用程序中启用调试日志？</h3><p>若要在 Spring Boot 应用程序中启用调试日志，可以将 application.properties 或 application.yml 文件中的 logging.level 属性设置为“DEBUG”。此配置将使日志记录框架能够输出详细的调试信息。或者，您可以对类使用@Slf4j注释来启用该特定类的日志记录。此外，还可以通过设置 logging.level 来配置特定包或类的日志记录级别。{package/class} 属性。</p>
+<p>若要为整个应用程序启用调试日志，请使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.level.&lt;package-name&gt;=DEBUG</span><br></pre></td></tr></table></figure>
+
+<p>若要为整个应用程序启用调试日志，请使用：</p>
+<h3 id="Spring-Boot-中如何支持响应式编程"><a href="#Spring-Boot-中如何支持响应式编程" class="headerlink" title="Spring Boot 中如何支持响应式编程"></a>Spring Boot 中如何支持<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B&zhida_source=entity&is_preview=1">响应式编程</a></h3><p>Spring Boot 通过与 <strong>Spring WebFlux</strong> 模块的集成来支持响应式编程。它允许开发人员构建非阻塞、事件驱动的应用程序，这些应用程序可以有效地处理大量并发请求，利用反应式流和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%8F%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B&zhida_source=entity&is_preview=1">反应式编程</a>模型。</p>
+<h3 id="如何在-Spring-Boot-应用程序中启用安全性？"><a href="#如何在-Spring-Boot-应用程序中启用安全性？" class="headerlink" title="如何在 Spring Boot 应用程序中启用安全性？"></a>如何在 Spring Boot 应用程序中启用安全性？</h3><p>我们可以使用以下不同的选项。</p>
+<ol>
+<li><strong>使用 Spring Security：</strong> 通过将 Spring Security Starter 依赖项添加到项目的构建配置中来启用安全性。</li>
+<li><strong>OAuth2 和 OpenID 连接：</strong>使用 OAuth2 和 OpenID Connect 协议实现安全身份验证和授权。</li>
+<li><strong>LDAP集成：</strong> 通过与 LDAP（轻量级目录访问协议）服务器集成以进行用户身份验证和授权来启用安全性。</li>
+<li><strong>JWT（JSON Web 令牌）身份验证：</strong>通过实施基于 JWT 的身份验证来实现无状态和可扩展的身份验证，从而实现安全性。</li>
+<li><strong>自定义身份验证提供程序：</strong>通过创建自定义身份验证提供程序来根据您自己的逻辑处理身份验证，从而实现安全性。</li>
+</ol>
+<h3 id="Spring-Boot-DevTools-的目的是什么？我们如何启用它？"><a href="#Spring-Boot-DevTools-的目的是什么？我们如何启用它？" class="headerlink" title="Spring Boot DevTools 的目的是什么？我们如何启用它？"></a>Spring Boot DevTools 的目的是什么？我们如何启用它？</h3><p>它旨在提高生产力，简化开发工作流程，并在开发阶段实现应用程序快速重启。</p>
+<p>以下是 Spring Boot DevTools 的一些主要功能和优势：</p>
+<ol>
+<li><strong>自动重启</strong>：DevTools 监视类路径中是否有任何更改，并在检测到修改时自动重启应用程序。</li>
+<li><strong>实时重载</strong>：DevTools 支持实时重载静态资源，如 HTML、CSS、JavaScript 文件。</li>
+<li><strong>远程应用程序重启</strong>：DevTools 提供远程触发应用程序重启的功能。在分布式环境中工作或应用程序在远程服务器上运行时，这可能很有用。</li>
+<li><strong>开发人员友好的错误页</strong>：DevTools 提供了一个增强的错误页，提供有关应用程序开发过程中遇到的异常和错误的详细信息。</li>
+<li><strong>配置属性支持</strong>：DevTools 支持热重载 Spring Boot 配置属性。对 application.properties 或 application.yml 文件所做的更改将自动应用，而无需重新启动应用程序，从而允许快速更新配置。</li>
+<li><strong>数据库控制台</strong>：DevTools 包括一个<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?q=%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93&zhida_source=entity&is_preview=1">嵌入式数据库</a>控制台，该控制台提供基于 Web 的界面来与应用程序的数据库进行交互。这使开发人员能够轻松执行 SQL 查询、查看和修改数据以及执行其他与数据库相关的任务，而无需外部工具。</li>
+</ol>
+<p>若要在 Spring Boot 应用程序中启用 Spring Boot DevTools，需要包含相应的依赖项和配置。下面是启用 DevTools 的步骤：</p>
+<p>添加 DevTools 依赖项：在 pom.xml 文件（适用于 Maven）或 build.gradle 文件（适用于 Gradle）中，添加以下依赖项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Maven --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Gradle</span><br><span class="line">implementation &#x27;org.springframework.boot:spring-boot-devtools&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启用自动重启：默认情况下，为使用 spring-boot：run 命令或从 IDE 运行的应用程序启用 DevTools。但是，您也可以通过将以下配置属性添加到 application.properties 或 application.ymlfile 中来为打包的应用程序启用它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.devtools.restart.enabled=true</span><br></pre></td></tr></table></figure>
+
+<h2 id="有经验的人的高级-Spring-Boot-面试问题"><a href="#有经验的人的高级-Spring-Boot-面试问题" class="headerlink" title="有经验的人的高级 Spring Boot 面试问题"></a>有经验的人的高级 Spring Boot 面试问题</h2><h3 id="如何在-Spring-Boot-应用程序中启用-HTTPS？"><a href="#如何在-Spring-Boot-应用程序中启用-HTTPS？" class="headerlink" title="如何在 Spring Boot 应用程序中启用 HTTPS？"></a>如何在 Spring Boot 应用程序中启用 HTTPS？</h3><p>若要在 Spring Boot 应用程序中启用 HTTPS，需要配置应用程序的服务器属性并提供必要的 SSL/TLS 证书。以下是启用 HTTPS 的一般步骤：</p>
+<ul>
+<li>获取 SSL/TLS 证书：从受信任的证书颁发机构 （CA） 获取 SSL/TLS 证书或生成用于开发/测试目的的自签名证书。</li>
+<li>配置服务器属性：使用以下服务器配置更新application.properties 或者 application.yml文件：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.port=8443</span><br><span class="line">server.ssl.key-store-type=PKCS12</span><br><span class="line">server.ssl.key-store=classpath:keystore.p12</span><br><span class="line">server.ssl.key-store-password=your_keystore_password</span><br><span class="line">server.ssl.key-alias=your_alias_name</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，替换为密钥库文件的路径，并设置适当的密码和别名值。keystore.p12</p>
+<ul>
+<li>提供 SSL/TLS 证书：将 SSL/TLS 证书文件 （） 放在类路径中，或在服务器属性中指定绝对文件路径。keystore.p12</li>
+<li>重新启动应用程序：重新启动 Spring Boot 应用程序以使更改生效。</li>
+<li>完成这些步骤后，Spring Boot 应用程序将配置为使用 HTTPS。您可以使用 <a target="_blank" rel="noopener" href="https://localhost:8443/">https://localhost:8443</a> 或服务器配置中指定的相应主机名和端口访问应用程序。</li>
+</ul>
+<h3 id="如何在-Spring-Boot-中配置外部配置"><a href="#如何在-Spring-Boot-中配置外部配置" class="headerlink" title="如何在 Spring Boot 中配置外部配置"></a>如何在 Spring Boot 中配置外部配置</h3><p>若要在 Spring Boot 中配置项目外部的外部配置，可以使用以下方法之一：</p>
+<ol>
+<li><strong>外部配置文件</strong>：您可以使用 spring.config.name 和 spring.config.location 属性指定外部配置文件的位置，而不是将 application.properties 或 application.ymlfile 放在项目中。例如，您可以将配置文件放在单独的目录中，并通过命令行或环境变量提供其位置。</li>
+<li><strong>操作系统环境变量</strong>：您可以利用操作系统提供的环境变量来配置 Spring Boot 应用程序。将所需的配置属性定义为环境变量，并使用@Value注释或 Environment 对象在应用程序中访问它们。</li>
+<li><strong>Spring Cloud Config</strong>：如果您有更复杂的配置设置或需要集中配置管理，则可以使用 Spring Cloud Config。它提供了一个服务器端组件，您可以在其中存储和管理多个应用程序的配置。然后，您的 Spring Boot 应用程序可以从 Spring Cloud Config 服务器获取其配置。</li>
+<li><strong>配置服务器</strong>：另一种选择是使用外部配置服务器，如 Apache ZooKeeper 或 HashiCorp Consul。这些服务器充当配置的中央存储库，可由多个应用程序访问。</li>
+</ol>
+<h3 id="如何使用-Maven-创建-Spring-Boot-应用程序？"><a href="#如何使用-Maven-创建-Spring-Boot-应用程序？" class="headerlink" title="如何使用 Maven 创建 Spring Boot 应用程序？"></a>如何使用 Maven 创建 Spring Boot 应用程序？</h3><p>若要使用 Maven 创建 Spring Boot 应用程序，请按照下列步骤操作：</p>
+<p><strong>设置 Maven</strong>：确保系统上安装了 Maven。您可以从 Apache Maven 网站下载 Maven 并按照安装说明进行操作。</p>
+<p><strong>创建 Maven 项目</strong>：打开命令行或终端，然后导航到要创建项目的目录。使用以下 Maven 命令创建新项目：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.example -DartifactId=my-spring-boot-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+
+<p>此命令使用指定的 groupId 和 artifactId 创建新的 Maven 项目。根据项目需求调整这些值。</p>
+<p><strong>添加 Spring Boot Starter 依赖项</strong>：打开项目的pom.xml文件，并为 Spring Boot 添加以下依赖项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.5.2&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此依赖项包括应用程序所需的 Spring Boot 库。</p>
+<p><strong>创建 Spring Boot 主类</strong>：在 Maven 项目的相应包中创建一个新的 Java 类。此类将用作 Spring Boot 应用程序的入口点。下面是一个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package com.example;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class MySpringBootApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(MySpringBootApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该@SpringBootApplication注解结合了基本 Spring Boot 应用程序所需的多个注解。</p>
+<p><strong>生成并运行应用程序</strong>：使用以下 Maven 命令生成并运行 Spring Boot 应用程序：</p>
+<p>Maven 将构建您的项目，解析依赖项，并启动 Spring Boot 应用程序。</p>
+<p>应用程序运行后，您可以使用<a href="http://localhost:8080（默认情况下）或指定的端口（如果您已自定义）在">http://localhost:8080（默认情况下）或指定的端口（如果您已自定义）在</a> Web 浏览器中访问它。</p>
+<p>就是这样！您已使用 Maven 创建了 Spring Boot 应用程序。现在，您可以添加其他依赖项、配置应用程序并开发所需的功能。</p>
+<h3 id="条件注释有哪些不同类型？"><a href="#条件注释有哪些不同类型？" class="headerlink" title="条件注释有哪些不同类型？"></a>条件注释有哪些不同类型？</h3><p>Spring Boot 中一些常用的条件注解是：</p>
+<ol>
+<li>@ConditionalOnClass：如果类路径中存在特定类，则此注释将配置 Bean 或组件。</li>
+<li>@ConditionalOnMissingClass：如果类路径中不存在特定类，则此注释将配置 Bean 或组件。</li>
+<li>@ConditionalOnBean：仅当应用程序上下文中存在另一个特定 Bean 时，此注释才配置 Bean 或组件。</li>
+<li>@ConditionalOnMissingBean：仅当应用程序上下文中不存在另一个特定 Bean 时，此注释才配置 Bean 或组件。</li>
+<li>@ConditionalOnProperty：此注解根据应用程序配置文件中特定属性的值配置 Bean 或组件。</li>
+<li>@ConditionalOnExpression：此注解基于 SpEL（Spring 表达式语言）表达式配置 Bean 或组件。</li>
+<li>@ConditionalOnWebApplication：仅当应用程序是 Web 应用程序时，此注释才配置 Bean 或组件。</li>
+<li>@ConditionalOnNotWebApplication：仅当应用程序不是 Web 应用程序时，此注释才配置 Bean 或组件。</li>
+</ol>
+<h3 id="您能否解释一下-Spring-Boot-执行器运行状况检查以及创建自定义运行状况指示器的过程？"><a href="#您能否解释一下-Spring-Boot-执行器运行状况检查以及创建自定义运行状况指示器的过程？" class="headerlink" title="您能否解释一下 Spring Boot 执行器运行状况检查以及创建自定义运行状况指示器的过程？"></a>您能否解释一下 Spring Boot 执行器运行状况检查以及创建自定义运行状况指示器的过程？</h3><p>运行状况检查提供有关应用程序整体运行状况的宝贵信息，例如数据库连接、外部服务可用性或您定义的任何其他自定义检查。</p>
+<p>默认情况下，Spring Boot Actuator 提供一组预定义的运行状况指示器，用于检查各种组件（如数据库、磁盘空间等）的运行状况。但是，您也可以创建自定义运行状况指示器来监视应用程序的特定方面。</p>
+<p>要创建自定义运行状况指示器，您需要实现 HealthIndicator 接口并覆盖 health（） 方法。health（） 方法应返回一个 Health 实例，该实例表示自定义组件的运行状况。可以使用 Health 类来指示组件是启动、关闭还是处于未知状态。</p>
+<p>下面是自定义运行状况指示器的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.actuate.health.Health;</span><br><span class="line">import org.springframework.boot.actuate.health.HealthIndicator;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class CustomHealthIndicator implements HealthIndicator &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Health health() &#123;</span><br><span class="line">        // 在此处执行自定义运行状况检查逻辑</span><br><span class="line">        boolean isHealthy = true; // 替换为实际运行状况检查逻辑</span><br><span class="line"></span><br><span class="line">        if (isHealthy) &#123;</span><br><span class="line">            return Health.up().build();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return Health.down().withDetail(&quot;CustomComponent&quot;, &quot;Not Healthy&quot;).build();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，CustomHealthIndicator 类实现 HealthIndicator 接口并重写 health（） 方法。在 health（） 方法中，您可以编写自定义运行状况检查逻辑。如果组件运行正常，则可以返回 Health.up（）。否则，您可以使用 withDetail（） 方法返回 Health.down（） 以及其他详细信息。</p>
+<p>创建自定义运行状况指示器后，Spring Boot Actuator 将自动检测到它，并通过 /actuator/health 端点公开其运行状况检查。</p>
+<h3 id="如何在-Spring-Boot-中创建自定义执行器端点？"><a href="#如何在-Spring-Boot-中创建自定义执行器端点？" class="headerlink" title="如何在 Spring Boot 中创建自定义执行器端点？"></a>如何在 Spring Boot 中创建自定义执行器端点？</h3><p>要在 Spring Boot 中创建自定义 Actuator 端点，您可以按照下列步骤操作：</p>
+<ol>
+<li><strong>创建自定义终结点</strong>：创建一个表示自定义终结点的新类。此类应使用 @Endpoint 进行批注，以指示它是执行器端点。您还可以使用其他注释（如 @ReadOperation、@WriteOperation 或 @DeleteOperation）来定义终端节点支持的操作类型。</li>
+<li><strong>定义终结点操作</strong>：在自定义终结点类中，定义终结点应执行的操作。您可以将 @ReadOperation 等注释用于只读操作，将 @WriteOperation 用于写入操作，将 @DeleteOperation 用于删除操作。这些注释有助于定义终结点的 HTTP 方法和请求映射。</li>
+<li><strong>实现终结点逻辑</strong>：为自定义终结点的每个操作实现逻辑。这可能包括检索信息、修改应用程序状态或执行任何其他所需的操作。您可以根据特定要求灵活地定义功能。</li>
+<li><strong>（可选）添加安全配置</strong>：如果自定义终结点需要安全限制，则可以通过添加安全注释或修改应用程序的安全配置来配置它。</li>
+</ol>
+<p>下面是创建自定义执行器端点的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.actuate.endpoint.annotation.Endpoint;</span><br><span class="line">import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;</span><br><span class="line">import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@Endpoint(id = &quot;customEndpoint&quot;)</span><br><span class="line">public class CustomEndpoint &#123;</span><br><span class="line"></span><br><span class="line">    @ReadOperation</span><br><span class="line">    public String getInformation() &#123;</span><br><span class="line">        // 检索和返回信息</span><br><span class="line">        return &quot;这是自定义终结点信息。&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @WriteOperation</span><br><span class="line">    public void updateInformation(String newInformation) &#123;</span><br><span class="line">        // 更新信息</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，CustomEndpoint 类使用 @Endpoint 进行批注，以将其定义为 Actuator 终结点。它有两个操作：getInformation（） 用 @ReadOperation 注释用于检索信息，updateInformation（） 用 @WriteOperation 注释用于更新信息。</p>
+<p>创建自定义终结点后，它将自动注册到 Spring Boot Actuator，您可以通过 /actuator 基本路径和终结点 ID 访问它。在这种情况下，可以通过 /actuator/customEndpoint 访问自定义终结点。</p>
+<h3 id="如何在-Spring-Boot-应用程序中启用-CORS（跨域资源共享）？"><a href="#如何在-Spring-Boot-应用程序中启用-CORS（跨域资源共享）？" class="headerlink" title="如何在 Spring Boot 应用程序中启用 CORS（跨域资源共享）？"></a>如何在 Spring Boot 应用程序中启用 CORS（跨域资源共享）？</h3><p>若要在 Spring Boot 应用程序中启用跨域资源共享 （CORS），可以执行以下步骤：</p>
+<p>添加 CORS 配置：创建一个配置类并使用 @Configuration 对其进行批注以定义 CORS 配置。在类中，创建一个 CorsFilter 类型的 Bean 来配置 CORS 设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.web.cors.CorsConfiguration;</span><br><span class="line">import org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line">import org.springframework.web.filter.CorsFilter;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class CorsConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public CorsFilter corsFilter() &#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span><br><span class="line">        CorsConfiguration config = new CorsConfiguration();</span><br><span class="line"></span><br><span class="line">        // 允许来自任何来源的请求</span><br><span class="line">        config.addAllowedOrigin(&quot;*&quot;);</span><br><span class="line"></span><br><span class="line">        // 允许特定的 HTTP methods (e.g., GET, POST, PUT, DELETE)</span><br><span class="line">        config.addAllowedMethod(&quot;*&quot;);</span><br><span class="line"></span><br><span class="line">        // 允许特定的 HTTP headers</span><br><span class="line">        config.addAllowedHeader(&quot;*&quot;);</span><br><span class="line"></span><br><span class="line">        source.registerCorsConfiguration(&quot;/**&quot;, config);</span><br><span class="line">        return new CorsFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，我们将 CORS 配置为允许来自任何源 的请求、允许所有 HTTP 方法 和允许所有 HTTP 标头 。您可以根据特定要求自定义这些设置。</p>
+<p><strong>启用 Web MVC 配置</strong>：如果尚未启用此操作，请确保通过在配置类上使用 @EnableWebMvc 注释或扩展 WebMvcConfigurerAdapter 类，在 Spring Boot 应用程序中启用 Web MVC 配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.EnableWebMvc;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableWebMvc</span><br><span class="line">public class WebMvcConfig extends WebMvcConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    // 如果需要，其他 Web MVC 配置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试 CORS 配置</strong>：在 Spring Boot 应用程序中启用 CORS 后，可以通过向终端节点发出跨域请求来测试它。确保响应中包含必要的 CORS 标头，例如 Access-Control-Allow-Origin、Access-Control-Allow-Methods 和 Access-Control-Allow-Headers。</p>
+<p>启用 CORS 后，Spring Boot 应用程序可以处理跨域请求并做出适当的响应。请务必考虑安全隐患，并根据应用程序的要求和安全策略配置 CORS 设置。</p>
+<h3 id="如何在-Spring-Boot-应用程序中安排任务？"><a href="#如何在-Spring-Boot-应用程序中安排任务？" class="headerlink" title="如何在 Spring Boot 应用程序中安排任务？"></a>如何在 Spring Boot 应用程序中安排任务？</h3><p>在 Spring Boot 应用程序中，您可以使用 Spring 的任务调度功能提供的@Scheduled注解来调度任务。以下是在 Spring Boot 应用程序中计划任务的方法：</p>
+<p><strong>启用计划</strong>：首先，确保在 Spring Boot 应用程序中启用了任务计划。这可以通过在配置类上使用 @EnableScheduling 注释或在主应用程序类上添加@SpringBootApplication注释以及@EnableScheduling来完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.scheduling.annotation.EnableScheduling;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableScheduling</span><br><span class="line">public class MyAppApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(MyAppApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建计划任务方法</strong>：在应用程序中定义要计划的方法。用 @Scheduled 注释方法，并使用 cron、固定延迟或固定速率指定所需的调度表达式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class MyScheduledTasks &#123;</span><br><span class="line"></span><br><span class="line">    @Scheduled(cron = &quot;0 0 8 * * *&quot;) //每天早上 8 点跑</span><br><span class="line">    public void executeTask() &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;计划任务已执行！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，该executeTask()方法计划根据提供的 cron 表达式在每天上午 8 点运行。</p>
+<p><strong>测试计划任务</strong>：定义计划任务后，可以启动 Spring Boot 应用程序并观察根据指定计划执行的计划任务。</p>
+<p>@Scheduled注释提供了多个用于指定调度表达式的选项，包括 cron 表达式、固定延迟和固定速率。您可以根据计划要求选择最合适的选项。</p>
+<h3 id="如何在-Spring-Boot-应用程序中启用缓存？"><a href="#如何在-Spring-Boot-应用程序中启用缓存？" class="headerlink" title="如何在 Spring Boot 应用程序中启用缓存？"></a>如何在 Spring Boot 应用程序中启用缓存？</h3><p>若要在 Spring Boot 应用程序中启用缓存，可以按照下列步骤操作：</p>
+<p><strong>添加缓存依赖</strong>项：确保必要的缓存依赖项包含在项目的依赖项中。Spring Boot 支持各种缓存提供程序，例如 Ehcache、Redis 和 Caffeine。将相应的缓存依赖项添加到项目的pom.xml文件中。</p>
+<p>例如，要使用 Ehcache 缓存提供程序，请添加以下依赖项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;ehcache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>启用缓存</strong>：要在 Spring Boot 应用程序中启用缓存，请@EnableCaching将注释添加到配置类中。此注解启用了 Spring 的缓存基础结构，并为应用程序准备了缓存。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.annotation.EnableCaching;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableCaching</span><br><span class="line">public class CachingConfig &#123;</span><br><span class="line">    //其他配置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>批注缓存方法</strong>：确定应用程序中要缓存的方法，并使用适当的缓存批注对其进行批注。Spring Boot 为缓存操作提供了 @Cacheable、@CachePut 和 @CacheEvict 等注释。</p>
+<p>例如，假设您有一个从数据库检索数据的方法，并且您想要缓存结果。可以使用 @Cacheable 对方法进行批注并指定缓存名称。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.annotation.Cacheable;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class DataService &#123;</span><br><span class="line"></span><br><span class="line">    @Cacheable(&quot;dataCache&quot;)</span><br><span class="line">    public Data getData(String key) &#123;</span><br><span class="line">        // 从数据库或外部服务获取数据的逻辑</span><br><span class="line">        return data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，getData（） 方法使用 @Cacheable 进行注释，并将缓存名称指定为“dataCache”。首次使用特定键调用此方法时，将提取并缓存数据。使用相同键的后续调用将从缓存中检索数据，而不是执行该方法。</p>
+<p><strong>配置缓存设置</strong>：如果需要自定义缓存行为，可以提供特定于所选缓存提供程序的其他配置属性。可以在 application.properties 或 application.yml 文件中设置这些配置属性。</p>
+<p>例如，如果您使用的是 Ehcache，则可以在 ehcache.xml 文件中配置缓存设置，并在 application.properties 文件中指定文件的位置。</p>
+<p>通过执行这些步骤，您可以在 Spring Boot 应用程序中启用缓存，并利用缓存的优势来提高性能并减少数据库或外部服务调用。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>总之，这些 Spring Boot 面试问题涵盖了与 Spring Boot、其功能和最佳实践相关的广泛主题。通过熟悉这些问题及其答案，您可以更好地准备 Spring Boot 面试，并展示您在开发 Spring Boot 应用程序方面的知识和专业知识。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/08/study/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="微服务基础知识">
+                  <i class="fa fa-angle-left"></i> 微服务基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/08/study/SpringCloud%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="SpringCloud基础知识">
+                  SpringCloud基础知识 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">闽ICP备2024060482号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Panzejia</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
